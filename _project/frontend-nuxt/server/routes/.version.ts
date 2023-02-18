@@ -1,4 +1,4 @@
-export default defineEventHandler(event => {
+export default defineEventHandler((event) => {
   const config = useRuntimeConfig()
   return {
     version: config.public.feVersion,

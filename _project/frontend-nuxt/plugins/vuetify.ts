@@ -7,7 +7,7 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 
 import { defineNuxtPlugin } from '#imports'
 
-export default defineNuxtPlugin(nuxtApp => {
+export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components,
     directives,

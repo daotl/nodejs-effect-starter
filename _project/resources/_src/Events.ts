@@ -18,17 +18,19 @@ export type ClientEvents = ParsedShapeOfCustom<typeof ClientEvents>
 // codegen:start {preset: model}
 //
 /* eslint-disable */
+// rome-ignore format: <explanation>
 export interface BogusEvent {
   readonly _tag: "BogusEvent"
   readonly at: Date
   readonly id: StringId
 }
+// rome-ignore format: <explanation>
 export namespace BogusEvent {
   /**
    * @tsplus type BogusEvent.Encoded
    */
   export interface Encoded {
-    readonly _tag: 'BogusEvent'
+    readonly _tag: "BogusEvent"
     readonly at: string
     readonly id: string
   }

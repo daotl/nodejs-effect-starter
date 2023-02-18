@@ -1,1 +1,1 @@
-import "@effect-app-boilerplate/models/_global"
+import '@effect-app-boilerplate/models/_global'

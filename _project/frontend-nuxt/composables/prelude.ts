@@ -8,7 +8,10 @@ import * as Order from '@effect-app/core/Order'
 import * as MO from '@effect-app/prelude/schema'
 import * as These from '@effect-app/schema/custom/These'
 import * as Either from '@fp-ts/core/Either'
-import type { NonEmptyArray, NonEmptyReadonlyArray } from '@fp-ts/core/ReadonlyArray'
+import type {
+  NonEmptyArray,
+  NonEmptyReadonlyArray,
+} from '@fp-ts/core/ReadonlyArray'
 
 export { flow, pipe } from '@effect-app/prelude/Function'
 // Must export explicity for auto import to work

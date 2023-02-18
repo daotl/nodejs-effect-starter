@@ -1,1 +1,1 @@
-import "@effect-app-boilerplate/api/_global.schema"
+import '@effect-app-boilerplate/api/_global.schema'

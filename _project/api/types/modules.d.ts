@@ -1,1 +1,1 @@
-declare module 'express-compression';
+declare module 'express-compression'

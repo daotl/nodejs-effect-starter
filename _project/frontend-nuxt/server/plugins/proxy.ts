@@ -1,7 +1,7 @@
 import * as cookie from 'cookie'
 import httpProxy from 'http-proxy' // make sure to use package redirect to "http-proxy-node16" for fixing closing event: https://github.com/http-party/node-http-proxy/pull/1559
 
-export default defineNitroPlugin(nitroApp => {
+export default defineNitroPlugin((nitroApp) => {
   const config = useRuntimeConfig()
   const apiProxy = httpProxy.createProxyServer({
     changeOrigin: true, // don't forget this, or you're going to chase your tail for hours

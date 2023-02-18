@@ -1,1 +1,1 @@
-export * from "./CurrentUser/service.js"
+export * from './CurrentUser/service.js'

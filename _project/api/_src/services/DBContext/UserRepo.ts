@@ -1,11 +1,11 @@
-import type { UserId } from "@effect-app-boilerplate/models/User"
-import { User } from "@effect-app-boilerplate/models/User"
-import { makeCodec } from "@effect-app/infra/api/codec"
-import { makeFilters } from "@effect-app/infra/filter"
-import type { Repository } from "@effect-app/infra/services/Repository"
-import type { Filter, Where } from "@effect-app/infra/services/Store"
-import { ContextMap, StoreMaker } from "@effect-app/infra/services/Store"
-import { UserProfile } from "../UserProfile.js"
+import type { UserId } from '@effect-app-boilerplate/models/User'
+import { User } from '@effect-app-boilerplate/models/User'
+import { makeCodec } from '@effect-app/infra/api/codec'
+import { makeFilters } from '@effect-app/infra/filter'
+import type { Repository } from '@effect-app/infra/services/Repository'
+import type { Filter, Where } from '@effect-app/infra/services/Store'
+import { ContextMap, StoreMaker } from '@effect-app/infra/services/Store'
+import { UserProfile } from '../UserProfile.js'
 
 export interface UserPersistenceModel extends User.Encoded {
   _etag: string | undefined
@@ -14,108 +14,113 @@ export interface UserPersistenceModel extends User.Encoded {
 const f_ = makeFilters<UserPersistenceModel>()
 export type UserWhereFilter = typeof f_
 
-export function makeUserFilter_(filter: (f: UserWhereFilter) => Filter<UserPersistenceModel>) {
+export function makeUserFilter_(
+  filter: (f: UserWhereFilter) => Filter<UserPersistenceModel>,
+) {
   return filter(f_)
 }
 
 export function usersWhere(
-  makeWhere: (
-    f: UserWhereFilter
-  ) => Where | readonly [Where, ...Where[]],
-  mode?: "or" | "and"
+  makeWhere: (f: UserWhereFilter) => Where | readonly [Where, ...Where[]],
+  mode?: 'or' | 'and',
 ) {
-  return makeUserFilter_(f => {
+  return makeUserFilter_((f) => {
     const m = makeWhere ? makeWhere(f) : []
-    return ({
+    return {
       mode,
-      where: (Array.isArray(m) ? m as unknown as [Where, ...Where[]] : [m]) as readonly [Where, ...Where[]]
-    })
+      where: (Array.isArray(m)
+        ? (m as unknown as [Where, ...Where[]])
+        : [m]) as readonly [Where, ...Where[]],
+    }
   })
 }
 
 const [_dec, _encode, encodeToMap] = makeCodec(User)
-const encodeToMapPM = flow(
-  encodeToMap,
-  _ =>
-    _.flatMap(map =>
-      Effect.gen(function*($) {
-        const { get } = yield* $(ContextMap.access)
-        return new Map(
-          [...map.entries()].map(([k, v]) => [k, mapToPersistenceModel(v, get)])
-        )
-      })
-    )
+const encodeToMapPM = flow(encodeToMap, (_) =>
+  _.flatMap((map) =>
+    Effect.gen(function* ($) {
+      const { get } = yield* $(ContextMap.access)
+      return new Map(
+        [...map.entries()].map(([k, v]) => [k, mapToPersistenceModel(v, get)]),
+      )
+    }),
+  ),
 )
 
 function mapToPersistenceModel(
   e: User.Encoded,
-  getEtag: (id: string) => string | undefined
+  getEtag: (id: string) => string | undefined,
 ): UserPersistenceModel {
   return {
     ...e,
-    _etag: getEtag(e.id)
+    _etag: getEtag(e.id),
   }
 }
 
 function mapReverse(
   { _etag, ...e }: UserPersistenceModel,
-  setEtag: (id: string, eTag: string | undefined) => void
+  setEtag: (id: string, eTag: string | undefined) => void,
 ): User.Encoded {
   setEtag(e.id, _etag)
   return e
 }
 
 const fakeUsers = ReadonlyArray.range(1, 8)
-  .map((_, i): User => ({
-    ...User.Arbitrary.generate.value,
-    role: i === 0 || i === 1 ? "manager" : "user"
-  })).toNonEmpty
-  .match(() => {
-    throw new Error("must have fake users")
-  }, _ => _)
+  .map(
+    (_, i): User => ({
+      ...User.Arbitrary.generate.value,
+      role: i === 0 || i === 1 ? 'manager' : 'user',
+    }),
+  )
+  .toNonEmpty.match(
+    () => {
+      throw new Error('must have fake users')
+    },
+    (_) => _,
+  )
 
-export type UserSeed = "sample" | ""
+export type UserSeed = 'sample' | ''
 
 /**
  * NOTE: Printer uniqueness handling is currently not optimal, and only uses a local lock,
  * so when running multiple instances, uniqueness is currently not guaranteed.
  */
 function makeUserRepo(seed: UserSeed) {
-  return Do($ => {
+  return Do(($) => {
     const { make } = $(StoreMaker.access)
 
     const makeItems = Effect.sync(() => {
-      const items = seed === "sample" ? fakeUsers : []
+      const items = seed === 'sample' ? fakeUsers : []
       return items
     })
 
     const store = $(
       make<UserPersistenceModel, string, UserId>(
-        "Users",
-        makeItems.flatMap(encodeToMapPM).setupNamedRequest("initial"),
+        'Users',
+        makeItems.flatMap(encodeToMapPM).setupNamedRequest('initial'),
         {
-          partitionValue: _ => "primary" /*(isIntegrationEvent(r) ? r.companyId : r.id*/
-        }
-      )
+          partitionValue: (_) =>
+            'primary' /*(isIntegrationEvent(r) ? r.companyId : r.id*/,
+        },
+      ),
     )
 
-    const allE = store.all.flatMap(items =>
-      Do($ => {
+    const allE = store.all.flatMap((items) =>
+      Do(($) => {
         const { set } = $(ContextMap.access)
-        return items.map(_ => mapReverse(_, set))
-      })
+        return items.map((_) => mapReverse(_, set))
+      }),
     )
 
-    const all = allE.flatMap(_ => _.forEachEffect(User.EParser.condemnDie))
+    const all = allE.flatMap((_) => _.forEachEffect(User.EParser.condemnDie))
 
     function findE(id: UserId) {
-      return store.find(id)
-        .flatMap(items =>
-          Do($ => {
-            const { set } = $(ContextMap.access)
-            return items.map(_ => mapReverse(_, set))
-          })
-        )
+      return store.find(id).flatMap((items) =>
+        Do(($) => {
+          const { set } = $(ContextMap.access)
+          return items.map((_) => mapReverse(_, set))
+        }),
+      )
     }
 
     function find(id: UserId) {
@@ -146,20 +151,20 @@ function makeUserRepo(seed: UserSeed) {
     // const save = (a: User) => saveE(User.Encoder(a))
 
     const saveAllE = (a: Iterable<User.Encoded>) =>
-      Effect(a.toNonEmptyArray)
-        .flatMapOpt(a =>
-          Do($ => {
-            const { get, set } = $(ContextMap.access)
-            const items = a.mapNonEmpty(_ => mapToPersistenceModel(_, get))
-            // TODO: Check duplicate printer
-            const ret = $(store.batchSet(items))
-            ret.forEach(_ => set(_.id, _._etag))
-          })
-        )
+      Effect(a.toNonEmptyArray).flatMapOpt((a) =>
+        Do(($) => {
+          const { get, set } = $(ContextMap.access)
+          const items = a.mapNonEmpty((_) => mapToPersistenceModel(_, get))
+          // TODO: Check duplicate printer
+          const ret = $(store.batchSet(items))
+          ret.forEach((_) => set(_.id, _._etag))
+        }),
+      )
 
     const saveAll = (a: Iterable<User>) => saveAllE(a.toChunk.map(User.Encoder))
 
-    const saveAndPublish = (items: Iterable<User>, _: Iterable<never> = []) => saveAll(items)
+    const saveAndPublish = (items: Iterable<User>, _: Iterable<never> = []) =>
+      saveAll(items)
     // .tap(() =>
     //   Effect(items.toNonEmptyArray).tapOpt(items =>
     //     // TODO: Poor Man's state change report; should perhaps auto track and filter for: ItemChanged, ItemStateChanged, or not changed.
@@ -176,11 +181,16 @@ function makeUserRepo(seed: UserSeed) {
       /**
        * @internal
        */
-      utils: { mapReverse, parse: User.Parser.unsafe, filter: store.filter, all: store.all },
-      itemType: "User",
+      utils: {
+        mapReverse,
+        parse: User.Parser.unsafe,
+        filter: store.filter,
+        all: store.all,
+      },
+      itemType: 'User',
       find,
       all,
-      saveAndPublish
+      saveAndPublish,
       /*
 .catchTag(
           "IndexError",
@@ -195,7 +205,8 @@ function makeUserRepo(seed: UserSeed) {
 /**
  * @tsplus type UserRepo
  */
-export interface UserRepo extends Repository<User, UserPersistenceModel, never, UserId, "User"> {}
+export interface UserRepo
+  extends Repository<User, UserPersistenceModel, never, UserId, 'User'> {}
 
 /**
  * @tsplus type UserRepo.Ops
@@ -215,19 +226,34 @@ export function LiveUserRepo(seed: UserSeed) {
  * @tsplus getter UserRepo getCurrentUser
  */
 export function getCurrentUser(repo: UserRepo) {
-  return UserProfile.accessWithEffect(_ => _.get.flatMap(_ => repo.get(_.id)))
+  return UserProfile.accessWithEffect((_) =>
+    _.get.flatMap((_) => repo.get(_.id)),
+  )
 }
 
 /**
  * @tsplus fluent UserRepo update
  */
 export function update(repo: UserRepo, mod: (user: User) => User) {
-  return UserProfile.accessWithEffect(_ => _.get.flatMap(_ => repo.get(_.id)).map(mod).flatMap(repo.save))
+  return UserProfile.accessWithEffect((_) =>
+    _.get
+      .flatMap((_) => repo.get(_.id))
+      .map(mod)
+      .flatMap(repo.save),
+  )
 }
 
 /**
  * @tsplus fluent UserRepo updateWithEffect
  */
-export function userUpdateWithEffect<R, E>(repo: UserRepo, mod: (user: User) => Effect<R, E, User>) {
-  return UserProfile.accessWithEffect(_ => _.get.flatMap(_ => repo.get(_.id)).flatMap(mod).flatMap(repo.save))
+export function userUpdateWithEffect<R, E>(
+  repo: UserRepo,
+  mod: (user: User) => Effect<R, E, User>,
+) {
+  return UserProfile.accessWithEffect((_) =>
+    _.get
+      .flatMap((_) => repo.get(_.id))
+      .flatMap(mod)
+      .flatMap(repo.save),
+  )
 }

@@ -2,4 +2,4 @@
 
 // codegen:end
 
-export * from "@effect-app/prelude/Operations"
+export * from '@effect-app/prelude/Operations'

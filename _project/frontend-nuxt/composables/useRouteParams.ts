@@ -1,6 +1,9 @@
 import type { SchemaAny } from '@effect-app/prelude/schema'
 import { typedKeysOf } from '@effect-app/prelude/utils'
-import { parseRouteParams, parseRouteParamsOption } from '@effect-app/vue/routeParams'
+import {
+  parseRouteParams,
+  parseRouteParamsOption,
+} from '@effect-app/vue/routeParams'
 
 import { Option } from './prelude'
 

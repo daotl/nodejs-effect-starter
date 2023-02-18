@@ -72,7 +72,7 @@
     "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./_src",
     "circular:dist": "madge --circular --extensions js ./dist",
     "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
-    "lint": "rome format . && rome check .",
+    "lint": "rome format --write . ",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint ./_src",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
     "autofix": "pnpm lint --fix",

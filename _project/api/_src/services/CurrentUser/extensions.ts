@@ -3,37 +3,44 @@
 //   return Layer(CurrentUser)(user)
 // }
 
-import type { User } from "@effect-app-boilerplate/models/User"
-import type { CurrentUserOps } from "../CurrentUser.js"
-import { CurrentUser } from "../CurrentUser.js"
+import type { User } from '@effect-app-boilerplate/models/User'
+import type { CurrentUserOps } from '../CurrentUser.js'
+import { CurrentUser } from '../CurrentUser.js'
 
 /**
  * @tsplus static CurrentUser.Ops get
  */
-export const GetCurrentUser = Effect.serviceWithEffect(CurrentUser, _ => _.get)
+export const GetCurrentUser = Effect.serviceWithEffect(
+  CurrentUser,
+  (_) => _.get,
+)
 
 /**
  * @tsplus getter CurrentUser.Ops with
  */
 export function with_(self: CurrentUserOps) {
-  return <B>(f: (x: User) => B) => Effect.serviceWithEffect(self, _ => _.get.map(f))
+  return <B>(f: (x: User) => B) =>
+    Effect.serviceWithEffect(self, (_) => _.get.map(f))
 }
 
 /**
  * @tsplus getter CurrentUser.Ops withEffect
  */
 export function withEffect_(self: CurrentUserOps) {
-  return <R, E, B>(f: (x: User) => Effect<R, E, B>) => Effect.serviceWithEffect(self, _ => _.get.flatMap(f))
+  return <R, E, B>(f: (x: User) => Effect<R, E, B>) =>
+    Effect.serviceWithEffect(self, (_) => _.get.flatMap(f))
 }
 
 /**
  * @tsplus getter CurrentUser.Ops get
  */
 export function get(self: CurrentUserOps) {
-  return self.accessWithEffect(_ => _.get)
+  return self.accessWithEffect((_) => _.get)
 }
 
 /** @tsplus static CurrentUser.Ops find */
-export const FindCurrentUser = CurrentUser.accessWithEffect(
-  _ => _.get.map(Option.some).catchTag("NotLoggedInError", () => Effect(Option.none))
+export const FindCurrentUser = CurrentUser.accessWithEffect((_) =>
+  _.get
+    .map(Option.some)
+    .catchTag('NotLoggedInError', () => Effect(Option.none)),
 )
