@@ -5,7 +5,7 @@
  * @param cb Function to run on unmount
  */
 export function onMountedWithCleanup(cb: () => Function | void) {
-  let cleanup: Function | undefined = undefined
+  let cleanup: Function | undefined
   onMounted(() => {
     const cleanup_ = cb()
     if (cleanup_) {

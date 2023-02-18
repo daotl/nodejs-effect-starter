@@ -1,57 +1,26 @@
-import type {
-  ApiConfig,
-  FetchError,
-  InvalidStateError,
-  NotFoundError,
-  NotLoggedInError,
-  OptimisticConcurrencyException,
-  ResponseError,
-  UnauthorizedError,
-  ValidationError,
-} from "@effect-app/prelude/client"
-import { flow, pipe, tuple } from "@effect-app/prelude/Function"
-import { useAction, useMutation } from "@effect-app/vue"
-import type { Http } from "@effect-app/core/http/http-client"
-import { InterruptedException } from "@effect/io/Cause"
-import type { ComputedRef } from "nuxt/dist/app/compat/capi"
-import { useToast } from "vue-toastification"
-import type { Either } from "./prelude"
-import { Effect } from "./prelude"
-import type {
-  MaybeComputedRef,
-  Pausable,
-  UseIntervalFnOptions,
-} from "@vueuse/core"
-import { Failure, Success } from "@effect-app-boilerplate/resources/Views"
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 
-export { useToast } from "vue-toastification"
+import { InterruptedException } from '@effect/io/Cause'
+import type { Http } from '@effect-app/core/http/http-client'
+import type { ApiConfig, FetchError, InvalidStateError, NotFoundError, NotLoggedInError, OptimisticConcurrencyException, ResponseError, UnauthorizedError, ValidationError } from '@effect-app/prelude/client'
+import { flow, pipe, tuple } from '@effect-app/prelude/Function'
+import { useAction, useMutation } from '@effect-app/vue'
+import { Failure, Success } from '@effect-app-boilerplate/resources/Views'
+import type { MaybeComputedRef, Pausable, UseIntervalFnOptions } from '@vueuse/core'
+import type { ComputedRef } from 'nuxt/dist/app/compat/capi'
+import { useToast } from 'vue-toastification'
 
-export {
-  clientFor,
-  isFailed,
-  isInitializing,
-  isRefreshing,
-  isSuccess,
-} from "@effect-app/prelude/client"
-export {
-  useAction,
-  useMutate,
-  useMutation,
-  useSafeQuery,
-  useSafeQuery_,
-  useSafeQueryWithArg,
-  useSafeQueryWithArg_,
-} from "@effect-app/vue"
-export {
-  refreshAndWaitAForOperation,
-  refreshAndWaitAForOperationP,
-  refreshAndWaitForOperation,
-  refreshAndWaitForOperationP,
-} from "@effect-app-boilerplate/resources/lib"
+import type { Either } from './prelude'
+import { Effect } from './prelude'
+
+export { refreshAndWaitAForOperation, refreshAndWaitAForOperationP, refreshAndWaitForOperation, refreshAndWaitForOperationP } from '@effect-app-boilerplate/resources/lib'
+export { clientFor, isFailed, isInitializing, isRefreshing, isSuccess } from '@effect-app/prelude/client'
+export { useAction, useMutate, useMutation, useSafeQuery, useSafeQuery_, useSafeQueryWithArg, useSafeQueryWithArg_ } from '@effect-app/vue'
+// export { useToast } from 'vue-toastification'
 
 export function pauseWhileProcessing(
   iv: Pausable,
-  pmf: () => Promise<unknown>
+  pmf: () => Promise<unknown>,
 ) {
   return Promise.resolve(iv.pause())
     .then(() => pmf())
@@ -61,24 +30,28 @@ export function pauseWhileProcessing(
 export function useIntervalPauseWhileProcessing(
   pmf: () => Promise<unknown>,
   interval?: MaybeComputedRef<number> | undefined,
-  options?: Omit<UseIntervalFnOptions, "immediateCallback"> | undefined
+  options?: Omit<UseIntervalFnOptions, 'immediateCallback'> | undefined,
 ) {
   const iv = useIntervalFn(
-    () => pauseWhileProcessing(iv, pmf),
+    () => {
+      void pauseWhileProcessing(iv, pmf)
+    },
     interval,
-    options ? { ...options, immediateCallback: false } : options
+    options ? { ...options, immediateCallback: false } : options,
   )
   return {
     isActive: iv.isActive,
   }
 }
 
-export const alert = (typeof window !== "undefined"
+export const alert = (typeof window !== 'undefined'
   ? window.alert
-  : undefined) as any as ((message?: any) => void) & ((message?: any) => void)
-export const confirm = (typeof window !== "undefined"
+  : undefined) as unknown as
+    & ((message?: unknown) => void)
+    & ((message?: unknown) => void)
+export const confirm = (typeof window !== 'undefined'
   ? window.confirm
-  : undefined) as any as (message?: string | undefined) => boolean
+  : undefined) as unknown as (message?: string | undefined) => boolean
 
 /**
  * Pass a function that returns an Effect, e.g from a client action, give it a name, and optionally pass an onSuccess callback.
@@ -88,39 +61,39 @@ export function useAndHandleMutation<
   I,
   E extends ResponseError | FetchError,
   A,
-  X
+  X,
 >(
   self: (i: I) => Effect.Effect<ApiConfig | Http, E, A>,
   action: string,
-  onSuccess: (_: A) => Promise<X>
+  onSuccess: (_: A) => Promise<X>,
 ): Resp<I, E, X>
 export function useAndHandleMutation<
   I,
   E extends ResponseError | FetchError,
-  A
+  A,
 >(
   self: (i: I) => Effect.Effect<ApiConfig | Http, E, A>,
-  action: string
+  action: string,
 ): Resp<I, E, A>
 export function useAndHandleMutation<
   I,
   E extends ResponseError | FetchError,
   A,
-  X
+  X,
 >(
   self: (i: I) => Effect.Effect<ApiConfig | Http, E, A>,
   action: string,
-  onSuccess?: (_: A) => Promise<X>
+  onSuccess?: (_: A) => Promise<X>,
 ) {
   const eff = onSuccess
     ? (i: I) =>
-        pipe(
-          self(i),
-          Effect.flatMap(_ => Effect.promise(() => onSuccess(_)))
-        )
+      pipe(
+        self(i),
+        Effect.flatMap(_ => Effect.promise(() => onSuccess(_))),
+      )
     : self
   const [a, b] = useMutation(
-    eff as (i: I) => Effect.Effect<ApiConfig | Http, E, X | A>
+    eff as (i: I) => Effect.Effect<ApiConfig | Http, E, X | A>,
   )
 
   return tuple(a, handleRequest(b, action))
@@ -138,12 +111,12 @@ type WithAction<A> = A & {
 
 type Resp<I, E, A> = readonly [
   ComputedRef<Res<E, A>>,
-  WithAction<(I: I) => Promise<void>>
+  WithAction<(I: I) => Promise<void>>,
 ]
 
 type ActResp<E, A> = readonly [
   ComputedRef<Res<E, A>>,
-  WithAction<() => Promise<void>>
+  WithAction<() => Promise<void>>,
 ]
 
 /**
@@ -152,22 +125,22 @@ type ActResp<E, A> = readonly [
  */
 export function useAndHandleAction<E extends ResponseError | FetchError, A>(
   self: Effect.Effect<ApiConfig | Http, E, A>,
-  action: string
+  action: string,
 ): ActResp<E, A>
 export function useAndHandleAction<E extends ResponseError | FetchError, A, X>(
   self: Effect.Effect<ApiConfig | Http, E, A>,
   action: string,
-  onSuccess: (a: A) => Promise<X>
+  onSuccess: (a: A) => Promise<X>,
 ): ActResp<E, X>
 export function useAndHandleAction<E extends ResponseError | FetchError, A, X>(
   self: Effect.Effect<ApiConfig | Http, E, A>,
   action: string,
-  onSuccess?: (a: A) => Promise<X>
+  onSuccess?: (a: A) => Promise<X>,
 ) {
   if (onSuccess) {
     const eff = pipe(
       self,
-      Effect.flatMap(_ => Effect.promise(() => onSuccess(_)))
+      Effect.flatMap(_ => Effect.promise(() => onSuccess(_))),
     )
     const [a, b] = useAction(eff)
     return tuple(a, handleRequest(b, action))
@@ -178,8 +151,8 @@ export function useAndHandleAction<E extends ResponseError | FetchError, A, X>(
 }
 
 const messages: Record<string, string | undefined> = {
-  Drucken: "An Drucker geschickt",
-  "Problem melden": "Problem gemeldet",
+  Drucken: 'An Drucker geschickt',
+  'Problem melden': 'Problem gemeldet',
 }
 
 /**
@@ -189,43 +162,42 @@ const messages: Record<string, string | undefined> = {
 export function handleRequest<
   E extends ResponseError | FetchError,
   A,
-  Args extends unknown[]
+  Args extends unknown[],
 >(f: (...args: Args) => Promise<Either.Either<E, A>>, action: string) {
   const toast = useToast()
   const message = messages[action] ?? action
-  const warnMessage = message + ", mit Warnungen"
-  const successMessage = messages[action] ?? action + " Success"
-  const errorMessage = action + " Fehlgeschlagen"
+  const warnMessage = `${message}, mit Warnungen`
+  const successMessage = messages[action] ?? `${action} Success`
+  const errorMessage = `${action} Fehlgeschlagen`
   return Object.assign(
     flow(f, p =>
       p.then(
         r =>
-          r._tag === "Right"
+          r._tag === 'Right'
             ? Failure.Guard(r.right)
               ? Promise.resolve(
-                  toast.warning(
-                    warnMessage + r.right.message ? "\n" + r.right.message : ""
-                  )
-                ).then(
-                  // eslint-disable-next-line @typescript-eslint/no-empty-function
-                  _ => {}
-                )
-              : Promise.resolve(
-                  toast.success(
-                    successMessage +
-                      (Success.Guard(r.right) && r.right.message
-                        ? "\n" + r.right.message
-                        : "")
-                  )
-                ).then(
-                  // eslint-disable-next-line @typescript-eslint/no-empty-function
-                  _ => {}
-                )
-            : Promise.resolve(
-                toast.error(`${errorMessage}: ` + renderError(r.left))
+                toast.warning(
+                  `${warnMessage}${r.right.message}`
+                    ? `\n${r.right.message}`
+                    : '',
+                ),
+              ).then(
+                _ => {},
               )
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
-                .then(_ => {}),
+              : Promise.resolve(
+                toast.success(
+                  successMessage
+                    + ((Success.Guard(r.right) && r.right.message)
+                      ? `\n${r.right.message}`
+                      : ''),
+                ),
+              ).then(
+                _ => {},
+              )
+            : Promise.resolve(
+              toast.error(`${errorMessage}: ${renderError(r.left)}`),
+            )
+              .then(_ => {}),
         err => {
           if (err instanceof InterruptedException) {
             return
@@ -233,40 +205,41 @@ export function handleRequest<
           // TODO: Report?
           console.error(`Unexpected Error trying to ${action}`, err)
           toast.error(
-            `Unexpected Error trying to ${action}: ` +
+            `Unexpected Error trying to ${action}: ${
               JSON.stringify(err, undefined, 2)
+            }`,
           )
-        }
-      )
-    ),
-    { action }
+        },
+      )),
+    { action },
   )
 }
 
 // TODO: Treat HttpErrorRequest and ResponseError as Exception
 // and treat HttpErrorResponse with a SupportedErrrors body, as a user useful error.
 export function renderError(e: ResponseError | FetchError) {
-  if (e._tag === "HttpErrorRequest") {
+  if (e._tag === 'HttpErrorRequest') {
     return `There was an error in the request: ${e.error}`
   }
-  if (e._tag === "HttpErrorResponse") {
+  if (e._tag === 'HttpErrorResponse') {
     return `There was an error in processing the response: \n${
-      e.response.body._tag === "Some" && e.response.body.value
+      (e.response.body._tag === 'Some' && e.response.body.value)
         ? parseError(e.response.body.value)
-        : ""
+        : ''
     } (${e.response.status})`
   }
 
-  if (e._tag === "ResponseError") {
+  if (e._tag === 'ResponseError') {
     return `The request was not successful: ${e.error}`
   }
 }
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return */
 function parseError(e: string) {
   try {
-    const js = JSON.parse(e) as any
-    if ("_tag" in js) {
-      if ("message" in js) {
+    const js = JSON.parse(e)
+    if ('_tag' in js) {
+      if ('message' in js) {
         return `${js._tag}: ${js.message}`
       }
       return js._tag
@@ -275,14 +248,15 @@ function parseError(e: string) {
       //   case "InvalidStateError":
       // }
     }
-    if ("message" in js) {
-      return js.message
+    if ('message' in js) {
+      return js.message as string
     }
-    return "Unknown"
+    return 'Unknown'
   } catch {
-    return "There was an error trying to parse the error response"
+    return 'There was an error trying to parse the error response'
   }
 }
+/* eslint-enable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return */
 
 export type SupportedErrors =
   | ValidationError
