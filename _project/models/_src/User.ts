@@ -1,22 +1,26 @@
-import { makePreparedLenses } from "@effect-app/prelude/schema"
+import { makePreparedLenses } from '@effect-app/prelude/schema'
 
-export const FirstName = ReasonableString["|>"](
-  arbitrary(FC =>
+export const FirstName = ReasonableString['|>'](
+  arbitrary((FC) =>
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    fakerArb(faker => faker.name.firstName)(FC).map(x => x as ReasonableString)
-  )
-)["|>"](withDefaults)
+    fakerArb((faker) => faker.name.firstName)(FC).map(
+      (x) => x as ReasonableString,
+    ),
+  ),
+)['|>'](withDefaults)
 export type FirstName = ParsedShapeOfCustom<typeof FirstName>
 
 export const DisplayName = FirstName
 export type DisplayName = ParsedShapeOfCustom<typeof DisplayName>
 
-export const LastName = ReasonableString["|>"](
-  arbitrary(FC =>
+export const LastName = ReasonableString['|>'](
+  arbitrary((FC) =>
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    fakerArb(faker => faker.name.lastName)(FC).map(x => x as ReasonableString)
-  )
-)["|>"](withDefaults)
+    fakerArb((faker) => faker.name.lastName)(FC).map(
+      (x) => x as ReasonableString,
+    ),
+  ),
+)['|>'](withDefaults)
 export type LastName = ParsedShapeOfCustom<typeof LastName>
 
 /**
@@ -30,7 +34,7 @@ export class FullName extends MNModel<
   FullName.Props
 >()({
   firstName: prop(FirstName),
-  lastName: prop(LastName)
+  lastName: prop(LastName),
 }) {
   static render(this: void, fn: FullName) {
     return LongString(`${fn.firstName} ${fn.lastName}`)
@@ -60,7 +64,7 @@ export function createFullName(firstName: string, lastName: string) {
 export const UserId = StringId
 export type UserId = StringId
 
-export const Role = literal("manager", "user")
+export const Role = literal('manager', 'user')
 export type Role = ParsedShapeOfCustom<typeof Role>
 
 /**
@@ -68,10 +72,15 @@ export type Role = ParsedShapeOfCustom<typeof Role>
  * @tsplus companion User
  */
 @useClassNameForSchema
-export class User extends MNModel<User, User.ConstructorInput, User.Encoded, User.Props>()({
+export class User extends MNModel<
+  User,
+  User.ConstructorInput,
+  User.Encoded,
+  User.Props
+>()({
   id: defaultProp(UserId, UserId.make),
   displayName: prop(DisplayName),
-  role: prop(Role)
+  role: prop(Role),
 }) {}
 
 /**
@@ -114,10 +123,12 @@ export type UserConstructor = typeof User
 // codegen:start {preset: model}
 //
 /* eslint-disable */
+// rome-ignore format: <explanation>
 export interface FullName {
   readonly firstName: ReasonableString
   readonly lastName: ReasonableString
 }
+// rome-ignore format: <explanation>
 export namespace FullName {
   /**
    * @tsplus type FullName.Encoded
@@ -135,11 +146,13 @@ export namespace FullName {
     extends ConstructorInputFromApi<typeof FullName> {}
   export interface Props extends GetProvidedProps<typeof FullName> {}
 }
+// rome-ignore format: <explanation>
 export interface User {
   readonly displayName: ReasonableString
   readonly id: StringId
   readonly role: Role
 }
+// rome-ignore format: <explanation>
 export namespace User {
   /**
    * @tsplus type User.Encoded

@@ -10,24 +10,24 @@ patchedDependencies:
   '@effect/language-service@0.0.19':
     hash: izp2ue34jjv4swyrhg2ux4ha3e
     path: patches/@effect__language-service@0.0.19.patch
-  '@typescript-eslint/scope-manager@5.52.0':
-    hash: tp5r7mwyjl4dxldk2tuwbgrsum
-    path: patches/@typescript-eslint__scope-manager@5.52.0.patch
   '@playwright/test@1.30.0':
     hash: 7ggrwwel7pztbzd4b2acwqdriu
     path: patches/@playwright+test+1.30.0.patch
-  '@phaphoso/eslint-plugin-dprint@0.5.2':
-    hash: 5r3oafqkulzxdb6awceadivssy
-    path: patches/@phaphoso__eslint-plugin-dprint@0.5.2.patch
-  typescript@5.0.0-tsplus.20230205:
-    hash: 3fpnb3exznmanjmuxoeacxgduu
-    path: patches/typescript@5.0.0-tsplus.20230205.patch
-  eslint-plugin-unused-imports@2.0.0:
-    hash: tnum7sl7jcutfljbv5jztcescq
-    path: patches/eslint-plugin-unused-imports@2.0.0.patch
+  '@typescript-eslint/scope-manager@5.52.0':
+    hash: tp5r7mwyjl4dxldk2tuwbgrsum
+    path: patches/@typescript-eslint__scope-manager@5.52.0.patch
   eslint-plugin-codegen@0.17.0:
     hash: 3ogk7peuefdu45q3hbzcgdiuna
     path: patches/eslint-plugin-codegen@0.17.0.patch
+  eslint-plugin-unused-imports@2.0.0:
+    hash: tnum7sl7jcutfljbv5jztcescq
+    path: patches/eslint-plugin-unused-imports@2.0.0.patch
+  typescript@5.0.0-tsplus.20230205:
+    hash: 3fpnb3exznmanjmuxoeacxgduu
+    path: patches/typescript@5.0.0-tsplus.20230205.patch
+  '@phaphoso/eslint-plugin-dprint@0.5.2':
+    hash: 5r3oafqkulzxdb6awceadivssy
+    path: patches/@phaphoso__eslint-plugin-dprint@0.5.2.patch
   date-fns@2.29.3:
     hash: g5hqt5bhnjezqo5vnkpprfkba4
     path: patches/date-fns@2.29.3.patch
@@ -37,13 +37,13 @@ importers:
   .:
     specifiers:
       '@babel/cli': ^7.20.7
+      '@daotl/effect-app-eslint-codegen-model': ^0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5
       '@daotl/rome-config': 0.0.1-alpha
       '@dprint/typescript': ^0.83.0
       '@effect-app/cli': ^0.3.1
       '@effect-app/compiler': ^0.12.0
       '@effect-app/core': ^0.24.1
-      '@effect-app/eslint-codegen-model': ^0.11.0
       '@effect-app/prelude': ^0.21.8
       '@effect/language-service': ^0.0.19
       '@tsconfig/strictest': ^1.0.2
@@ -91,13 +91,13 @@ importers:
       vite-node: 0.28.5_@types+node@18.11.11
     devDependencies:
       '@babel/cli': 7.20.7
+      '@daotl/effect-app-eslint-codegen-model': 0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5_k6i3yqezdmdgvabm6kk4z2yexe
       '@daotl/rome-config': 0.0.1-alpha
       '@dprint/typescript': 0.83.0
       '@effect-app/cli': 0.3.1
       '@effect-app/compiler': 0.12.0_@types+node@18.11.11
       '@effect-app/core': 0.24.1
-      '@effect-app/eslint-codegen-model': 0.11.0
       '@effect-app/prelude': 0.21.8
       '@effect/language-service': 0.0.19_izp2ue34jjv4swyrhg2ux4ha3e
       '@tsconfig/strictest': 1.0.2
@@ -888,7 +888,6 @@ packages:
       '@babel/types': 7.20.7
       '@jridgewell/gen-mapping': 0.3.2
       jsesc: 2.5.2
-    dev: true
 
   /@babel/generator/7.20.7:
     resolution: {integrity: sha512-7wqMOJq8doJMZmP4ApXTzLxSr7+oO2jroJURrVEp6XShrQUObV8Tq/D0NCcoYg2uHqUrjzO0zwBjoYzelxK+sw==}
@@ -2141,7 +2140,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.20.7
+      '@babel/generator': 7.20.14
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.19.0
       '@babel/helper-hoist-variables': 7.18.6
@@ -2183,6 +2182,22 @@ packages:
 
   /@daotl/dprint-config/0.0.1:
     resolution: {integrity: sha512-puFwOkJ1UxQilLqi/n2TRc8ajJaJ3HpoXEaDMWmyaxxCuUoxKX6OwdGc2e3Uz1U4bjTf6AWjdXpa7rMChmhcGA==}
+    dev: true
+
+  /@daotl/effect-app-eslint-codegen-model/0.11.0:
+    resolution: {integrity: sha512-kaB7Hl7Ai9eCjWp2GlxY0PYySafEmcno7NZJQocdeOl2W/NfyYE6L/KqPzspCgKG20QpEr7l81TvNgVW0TURDA==}
+    dependencies:
+      '@babel/generator': 7.20.14
+      '@babel/parser': 7.20.15
+      eslint-plugin-codegen: 0.17.0_3ogk7peuefdu45q3hbzcgdiuna
+      glob: 8.1.0
+      io-ts: 2.2.20
+      io-ts-extra: 0.11.6
+      js-yaml: 4.1.0
+      lodash: 4.17.21
+    transitivePeerDependencies:
+      - fp-ts
+      - supports-color
     dev: true
 
   /@daotl/eslint-config-vue/1.0.0-alpha.5_k6i3yqezdmdgvabm6kk4z2yexe:
@@ -2278,22 +2293,6 @@ packages:
       validator: 13.9.0
     transitivePeerDependencies:
       - encoding
-
-  /@effect-app/eslint-codegen-model/0.11.0:
-    resolution: {integrity: sha512-AQ14gHpDNOuMBVTVgGoX8LyZ5yg/IS/WMIzvLFCGlY0ajIpGJvj4Lto+RlxBM7LWcUvpDOjH4Dg6S/7pwoGSnw==}
-    dependencies:
-      '@babel/generator': 7.20.14
-      '@babel/parser': 7.20.15
-      eslint-plugin-codegen: 0.17.0_3ogk7peuefdu45q3hbzcgdiuna
-      glob: 8.1.0
-      io-ts: 2.2.20
-      io-ts-extra: 0.11.6
-      js-yaml: 4.1.0
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - fp-ts
-      - supports-color
-    dev: true
 
   /@effect-app/infra-adapters/0.20.8:
     resolution: {integrity: sha512-UHOyhf/w3Jr+KyNVRbpV2d8N789FcMkAUuV9FadBxu+SODCqz18jRokSJu9Pj3S8JYuZ7ydtTlBU1QHYU6Qlvg==}
@@ -8021,7 +8020,7 @@ packages:
     dev: true
 
   /fs.realpath/1.0.0:
-    resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
 
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
@@ -8559,7 +8558,7 @@ packages:
     dev: true
 
   /inflight/1.0.6:
-    resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
@@ -10963,7 +10962,7 @@ packages:
     dev: false
 
   /once/1.4.0:
-    resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
+    resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
     dependencies:
       wrappy: 1.0.2
 
@@ -14810,7 +14809,7 @@ packages:
       strip-ansi: 7.0.1
 
   /wrappy/1.0.2:
-    resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+    resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
 
   /write-file-atomic/3.0.3:
     resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}

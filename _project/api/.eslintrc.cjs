@@ -1,10 +1,10 @@
-const makeBase = require("../../.eslintrc.base")
+const makeBase = require('../../.eslintrc.base')
 const base = makeBase(__dirname)
 module.exports = {
   ...base,
-  plugins: base.plugins.concat(["formatjs"]),
+  plugins: base.plugins.concat(['formatjs']),
   rules: {
     ...base.rules,
-    "formatjs/enforce-placeholders": "error",
+    'formatjs/enforce-placeholders': 'error',
   },
 }

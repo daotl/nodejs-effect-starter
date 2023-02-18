@@ -5,7 +5,7 @@ module.exports = {
   ...base,
   rules: {
     ...base.rules,
-    'codegen/codegen': ['error', { presets: require('@effect-app/eslint-codegen-model') }],
+    'codegen/codegen': ['error', { presets: require('@daotl/effect-app-eslint-codegen-model') }],
     "@typescript-eslint/no-empty-interface": "off"
   }
 }
