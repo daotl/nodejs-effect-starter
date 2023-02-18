@@ -22,7 +22,7 @@ module.exports = (dirName, forceTS = false) => {
         { name: "./index", "message": "Please import from the specific file instead. Imports from index in the same directory are almost always wrong (circular)."}
       ] }],
 
-      'codegen/codegen': ['error'],
+      'codegen/codegen': ['error', { presets: require('@effect-app/eslint-codegen-model/dist/presets/barrel') }]
     },
     overrides: [
       {
