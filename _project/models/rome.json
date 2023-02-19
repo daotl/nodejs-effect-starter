@@ -3,15 +3,15 @@
   "files": {
     "ignore": ["dist"]
   },
-  "formatter": {
-    "formatWithErrors": true,
-    "indentStyle": "space"
-  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
     }
+  },
+  "formatter": {
+    "formatWithErrors": true,
+    "indentStyle": "space"
   },
   "javascript": {
     "formatter": {

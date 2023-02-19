@@ -75,7 +75,7 @@
     "@babel/cli": "^7.20.7",
     "@daotl/effect-app-eslint-codegen-model": "^0.11.0",
     "@daotl/eslint-config-vue": "1.0.0-alpha.5",
-    "@daotl/rome-config": "0.0.1-alpha",
+    "@daotl/rome-config": "0.0.1-alpha.2",
     "@dprint/typescript": "^0.83.0",
     "@effect-app/cli": "^0.3.1",
     "@effect-app/compiler": "^0.12.0",

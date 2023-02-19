@@ -39,7 +39,7 @@ importers:
       '@babel/cli': ^7.20.7
       '@daotl/effect-app-eslint-codegen-model': ^0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5
-      '@daotl/rome-config': 0.0.1-alpha
+      '@daotl/rome-config': 0.0.1-alpha.2
       '@dprint/typescript': ^0.83.0
       '@effect-app/cli': ^0.3.1
       '@effect-app/compiler': ^0.12.0
@@ -93,7 +93,7 @@ importers:
       '@babel/cli': 7.20.7
       '@daotl/effect-app-eslint-codegen-model': 0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5_k6i3yqezdmdgvabm6kk4z2yexe
-      '@daotl/rome-config': 0.0.1-alpha
+      '@daotl/rome-config': 0.0.1-alpha.2
       '@dprint/typescript': 0.83.0
       '@effect-app/cli': 0.3.1
       '@effect-app/compiler': 0.12.0_@types+node@18.11.11
@@ -2246,9 +2246,13 @@ packages:
       - webpack
     dev: true
 
-  /@daotl/rome-config/0.0.1-alpha:
-    resolution: {integrity: sha512-LuA4MpE8u3tWr/DsvRn1+0k6WRP2/3FIHHGLKTU6jB3lndmbi37V56jJv0uj8hAAPmZLMxfnBCluApwAKPu2xA==}
+  /@daotl/rome-config/0.0.1-alpha.2:
+    resolution: {integrity: sha512-fQ8XATbbtHL5m4UAgpYjHp5+8IuWe4wWhIc0/918dSobQg51cjjTQDtueRpGDHIlYzI3S4SpKrwTbNsTuoctiw==}
+    hasBin: true
     requiresBuild: true
+    dependencies:
+      deepmerge: 4.3.0
+      json-stable-stringify: 1.0.2
     dev: true
 
   /@dprint/typescript/0.83.0:
@@ -3538,7 +3542,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2_rollup@3.14.0
       '@types/resolve': 1.20.2
-      deepmerge: 4.2.2
+      deepmerge: 4.3.0
       is-builtin-module: 3.2.0
       is-module: 1.0.0
       resolve: 1.22.1
@@ -3678,7 +3682,7 @@ packages:
     resolution: {integrity: sha512-3AsAxfN3GDBcXoZ/y1mzAAbKzTtUZ5+ZrHOmWQ279AuaFXUNCh9bPnRpN504bgveTqoW+11IzPg3I0WVgDINpw==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      deepmerge: 4.2.2
+      deepmerge: 4.3.0
     dev: false
 
   /@sendgrid/mail/7.7.0:
@@ -6091,8 +6095,8 @@ packages:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
     dev: true
 
-  /deepmerge/4.2.2:
-    resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
+  /deepmerge/4.3.0:
+    resolution: {integrity: sha512-z2wJZXrmeHdvYJp/Ux55wIjqo81G5Bp4c+oELTW+7ar6SogWHajt5a9gO3s3IDaGSAXjDk0vlQKN3rms8ab3og==}
     engines: {node: '>=0.10.0'}
 
   /defaults/1.0.4:
