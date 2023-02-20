@@ -10,7 +10,7 @@
     "preview": "nuxt preview",
     "start": "node .output/server/index.mjs",
     "ncu": "ncu",
-    "lint": "rome format --write . ",
+    "lint": "rome format --write . && rome check --apply .",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 eslint --ext .ts,.vue --ignore-path ../../.gitignore .",
     "autofix": "pnpm lint --fix",
     "testsuite": "pnpm lint",

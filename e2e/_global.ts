@@ -1,4 +1,4 @@
 /**
  * @tsplus global
  */
-import "@effect-app/prelude/_global"
+import '@effect-app/prelude/_global'

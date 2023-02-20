@@ -1,4 +1,4 @@
-import type { Selectors } from "./selectors"
+import type { Selectors } from './selectors'
 
 // function untag<T>(a: T & UnionBrand) :T
 // const POTab = untag(null as Id<PurchaseOrderTabKey>)
@@ -8,4 +8,6 @@ import type { Selectors } from "./selectors"
 
 export type EnhancedSelectors = Selectors // TODO | custom ones
 
-export type TestSelector = EnhancedSelectors | `${EnhancedSelectors}${` ` | `:`}${string}`
+export type TestSelector =
+  | EnhancedSelectors
+  | `${EnhancedSelectors}${` ` | `:`}${string}`

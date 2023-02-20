@@ -1,16 +1,20 @@
 /// <reference types="vitest" />
-import { effectPlugin } from "@effect-app/compiler/vitePlugin2"
-import fs from "fs"
-import makeConfig from "./vite.config.base"
-import AutoImport from "unplugin-auto-import/vite"
-import { UserConfig } from "vite"
-import { defineConfig } from "vite"
+import { effectPlugin } from '@effect-app/compiler/vitePlugin2'
+import fs from 'fs'
+import makeConfig from './vite.config.base'
+import AutoImport from 'unplugin-auto-import/vite'
+import { UserConfig } from 'vite'
+import { defineConfig } from 'vite'
 
 export default function defineTestConfig(
   dirName?: string,
-  transform?: (cfg: UserConfig, useDist: boolean, useFullDist: boolean)  => UserConfig,
-  useDist = process.env.TEST_USE_DIST === "true",
-  useFullDist = process.env.TEST_USE_FULL_DIST === "true",
+  transform?: (
+    cfg: UserConfig,
+    useDist: boolean,
+    useFullDist: boolean,
+  ) => UserConfig,
+  useDist = process.env.TEST_USE_DIST === 'true',
+  useFullDist = process.env.TEST_USE_FULL_DIST === 'true',
 ) {
   if (useFullDist) {
     useDist = true
@@ -22,18 +26,27 @@ export default function defineTestConfig(
     // include: [
     //   /\.test\.[tj]sx?$/ // .ts, .tsx, .js, .jsx
     // ],
-    imports: [
-      "vitest"
-    ]
+    imports: ['vitest'],
   })
   const cfg = {
     ...b,
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    plugins: useFullDist ? [autoImport] : [effectPlugin({ tsconfig: fs.existsSync("tsconfig.test.local.json") ? "tsconfig.test.local.json" : "tsconfig.test.json" }), autoImport],
+    plugins: useFullDist
+      ? [autoImport]
+      : [
+          effectPlugin({
+            tsconfig: fs.existsSync('tsconfig.test.local.json')
+              ? 'tsconfig.test.local.json'
+              : 'tsconfig.test.json',
+          }),
+          autoImport,
+        ],
     test: {
-      ...b.test, 
-      include: useFullDist ? ["./_test/dist/**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"] : ["./_test/**/*.test.{ts,mts,cts,jsx,tsx}"],
-      exclude: []
+      ...b.test,
+      include: useFullDist
+        ? ['./_test/dist/**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}']
+        : ['./_test/**/*.test.{ts,mts,cts,jsx,tsx}'],
+      exclude: [],
     },
     //watchExclude: ["**/node_modules/**"],
     //forceRerunTriggers: ['**/package.json/**', '**/vitest.config.*/**', '**/vite.config.*/**', '**/dist/**']

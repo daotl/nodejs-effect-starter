@@ -39,7 +39,7 @@ importers:
       '@babel/cli': ^7.20.7
       '@daotl/effect-app-eslint-codegen-model': ^0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5
-      '@daotl/rome-config': 0.0.1-alpha.2
+      '@daotl/rome-config': 0.0.1-alpha.4
       '@dprint/typescript': ^0.83.0
       '@effect-app/cli': ^0.3.1
       '@effect-app/compiler': ^0.12.0
@@ -93,7 +93,7 @@ importers:
       '@babel/cli': 7.20.7
       '@daotl/effect-app-eslint-codegen-model': 0.11.0
       '@daotl/eslint-config-vue': 1.0.0-alpha.5_k6i3yqezdmdgvabm6kk4z2yexe
-      '@daotl/rome-config': 0.0.1-alpha.2
+      '@daotl/rome-config': 0.0.1-alpha.4_rome@11.0.0
       '@dprint/typescript': 0.83.0
       '@effect-app/cli': 0.3.1
       '@effect-app/compiler': 0.12.0_@types+node@18.11.11
@@ -2246,13 +2246,16 @@ packages:
       - webpack
     dev: true
 
-  /@daotl/rome-config/0.0.1-alpha.2:
-    resolution: {integrity: sha512-fQ8XATbbtHL5m4UAgpYjHp5+8IuWe4wWhIc0/918dSobQg51cjjTQDtueRpGDHIlYzI3S4SpKrwTbNsTuoctiw==}
+  /@daotl/rome-config/0.0.1-alpha.4_rome@11.0.0:
+    resolution: {integrity: sha512-gLVldXscs26Yx01I6MDJeL6JVOvBZ7HjL0O1oWH1yReWojLZe7S4gthAznnlIFFpU9v+tuZGjQGXQ6j3BNkWAg==}
     hasBin: true
     requiresBuild: true
+    peerDependencies:
+      rome: ^11.0.0
     dependencies:
       deepmerge: 4.3.0
       json-stable-stringify: 1.0.2
+      rome: 11.0.0
     dev: true
 
   /@dprint/typescript/0.83.0:

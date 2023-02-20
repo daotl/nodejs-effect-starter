@@ -1,18 +1,18 @@
-const makeBase = require("./.eslintrc.base");
+const makeBase = require('./.eslintrc.base')
 
-module.exports = function(dir, forceTS) {
-  const base = makeBase(dir, forceTS);
+module.exports = function (dir, forceTS) {
+  const base = makeBase(dir, forceTS)
   const rules = Object.keys(base.rules).reduce((prev, cur) => {
     // TODO
-    if (cur !== "codegen/codegen") {
-      prev[cur] = base.rules[cur];
+    if (cur !== 'codegen/codegen') {
+      prev[cur] = base.rules[cur]
     }
-    return prev;
-  }, {});
+    return prev
+  }, {})
 
   return {
     ...base,
-    parser: "vue-eslint-parser",
+    parser: 'vue-eslint-parser',
     // extends: '@daotl/vue/typescript',
     extends: '../../node_modules/@daotl/eslint-config/typescript.js',
     overrides: [
@@ -28,5 +28,5 @@ module.exports = function(dir, forceTS) {
       ...rules,
       'no-undef': 'off', // Turned off for `unplugin-auto-import`
     },
-  };
+  }
 }
