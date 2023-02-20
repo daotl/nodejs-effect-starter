@@ -1,18 +1,6 @@
 {
   "name": "@effect-app-boilerplate/root",
   "private": true,
-  "pnpm": {
-    "patchedDependencies": {
-      "@effect/language-service@0.0.19": "patches/@effect__language-service@0.0.19.patch",
-      "@playwright/test@1.30.0": "patches/@playwright+test+1.30.0.patch",
-      "@typescript-eslint/scope-manager@5.52.0": "patches/@typescript-eslint__scope-manager@5.52.0.patch",
-      "eslint-plugin-codegen@0.17.0": "patches/eslint-plugin-codegen@0.17.0.patch",
-      "eslint-plugin-unused-imports@2.0.0": "patches/eslint-plugin-unused-imports@2.0.0.patch",
-      "typescript@5.0.0-tsplus.20230205": "patches/typescript@5.0.0-tsplus.20230205.patch",
-      "@phaphoso/eslint-plugin-dprint@0.5.2": "patches/@phaphoso__eslint-plugin-dprint@0.5.2.patch",
-      "date-fns@2.29.3": "patches/date-fns@2.29.3.patch"
-    }
-  },
   "scripts": {
     "all": "pnpm -r --filter \"!./play\" --filter \"!./libs/**/*\"",
     "preinstall": "npx only-allow pnpm",
@@ -63,6 +51,16 @@
     "date-fns": "^2.29.3",
     "http-proxy": "npm:http-proxy-node16@1.0.0"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "@effect/language-service@0.0.19": "patches/@effect__language-service@0.0.19.patch",
+      "@playwright/test@1.30.0": "patches/@playwright+test+1.30.0.patch",
+      "@typescript-eslint/scope-manager@5.52.0": "patches/@typescript-eslint__scope-manager@5.52.0.patch",
+      "eslint-plugin-codegen@0.17.0": "patches/eslint-plugin-codegen@0.17.0.patch",
+      "typescript@5.0.0-tsplus.20230205": "patches/typescript@5.0.0-tsplus.20230205.patch",
+      "date-fns@2.29.3": "patches/date-fns@2.29.3.patch"
+    }
+  },
   "dependencies": {
     "@types/react": "^18.0.28",
     "cross-env": "^7.0.3",
@@ -97,6 +95,7 @@
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-plugin-codegen": "^0.17.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-watch": "^8.0.0",
     "madge": "^6.0.0",
     "nodemon": "^2.0.20",
