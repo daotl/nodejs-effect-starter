@@ -1,16 +1,6 @@
 {
   "configurations": [
     {
-      "name": "rome-config",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      // "runtimeArgs": ["debug"],
-      "runtimeExecutable": "node",
-      "program": "${workspaceFolder}/node_modules/@daotl/rome-config/bin/gen.js",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
-    },
-    {
       "name": "API debug",
       "request": "launch",
       "cwd": "${workspaceFolder}/_project/api",
@@ -19,19 +9,6 @@
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
     },
-    // {
-    //   "name": "UI debug",
-    //   "request": "launch",
-    //   "cwd": "${workspaceFolder}/_project/frontend-nuxt",
-    //   "runtimeArgs": [
-    //     "dev:debug"
-    //   ],
-    //   "runtimeExecutable": "pnpm",
-    //   "skipFiles": [
-    //     "<node_internals>/**"
-    //   ],
-    //   "type": "pwa-node",
-    // },
     {
       "name": "API Debug Attach",
       "port": 9229,
@@ -39,16 +16,6 @@
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node",
-      "sourceMaps": true
-    },
-    {
-      "name": "UI Debug Attach",
-      "port": 9230,
-      "cwd": "${workspaceFolder}/_project/frontend-nuxt",
-      "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node",
-      "webRoot": "${workspaceFolder}/_project/frontend-nuxt",
       "sourceMaps": true
     }
   ]

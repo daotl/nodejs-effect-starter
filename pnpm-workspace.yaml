@@ -1,6 +1,0 @@
-packages:
-  - _project/*
-  - e2e
-  - play
-  #- libs/packages/* # link
-  #- libs # link

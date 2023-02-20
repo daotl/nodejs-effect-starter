@@ -1,0 +1,6 @@
+_src/**/*.js
+_src/**/*.d.ts
+_test/**/*.js
+_test/**/*.d.ts
+**/dist
+node_modules/
