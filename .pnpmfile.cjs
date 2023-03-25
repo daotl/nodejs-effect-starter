@@ -57,7 +57,10 @@ function readPackage(pkg, context) {
 
 module.exports = {
   hooks: {
-    afterAllResolved,
+    // Temporary disabled for causing errors for unknown reason:
+    //   ERROR  @effect-app/prelude found 2 times
+    //   @effect-app/infra-adapters found 2 times
+    // afterAllResolved,
     readPackage,
   },
 }

@@ -1,4 +1,1 @@
-/**
- * @tsplus global
- */
-import '@effect-app/prelude/_global'
+import '@effect-app-boilerplate/resources/_global'

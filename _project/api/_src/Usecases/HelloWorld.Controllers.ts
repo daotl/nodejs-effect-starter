@@ -12,4 +12,4 @@ const Get = matchWith('Get')((_req, { context, user }) =>
   }),
 )
 
-export const HelloWorldControllers = controllers(Effect.struct({ Get }))
+export const HelloWorldControllers = controllers({ Get })

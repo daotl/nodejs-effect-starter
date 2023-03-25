@@ -18,27 +18,12 @@ export type ClientEvents = ParsedShapeOfCustom<typeof ClientEvents>
 // codegen:start {preset: model}
 //
 /* eslint-disable */
-// rome-ignore format: <explanation>
-export interface BogusEvent {
-  readonly _tag: "BogusEvent"
-  readonly at: Date
-  readonly id: StringId
-}
-// rome-ignore format: <explanation>
 export namespace BogusEvent {
   /**
    * @tsplus type BogusEvent.Encoded
+   * @tsplus companion BogusEvent.Encoded/Ops
    */
-  export interface Encoded {
-    readonly _tag: "BogusEvent"
-    readonly at: string
-    readonly id: string
-  }
-  export const Encoded: EncodedOps = { $: {} }
-  /**
-   * @tsplus type BogusEvent.Encoded/Ops
-   */
-  export interface EncodedOps {}
+  export class Encoded extends EncodedClass<typeof BogusEvent>() {}
   export interface ConstructorInput
     extends ConstructorInputFromApi<typeof BogusEvent> {}
   export interface Props extends GetProvidedProps<typeof BogusEvent> {}

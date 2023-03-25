@@ -17,19 +17,19 @@ const appConfig = BaseConfig.config.runSync$
 const apiConfig = ApiConfig.config.runSync$
 const cfg = { ...appConfig, ...apiConfig, port: PORT }
 
-const appLayer =
-  Logger.minimumLogLevel(Level.Debug) >
-  Logger.logFmt >
-  Emailer.Fake >
-  MemQueue.Live >
-  LiveApiConfig(
-    Config.struct({
-      apiUrl: Config.string('apiUrl').withDefault('http://127.0.0.1:' + PORT),
-      headers: Config.string().table('headers').optional,
-    }),
-  ) >
-  HF.Client(fetch) >
-  api(cfg)
+const appLayer = Logger.minimumLogLevel(Level.Debug)
+  > Logger.logFmt
+  > Emailer.Fake
+  > MemQueue.Live
+  > LiveApiConfig(
+    Config.all({
+      apiUrl: Config.string("apiUrl").withDefault("http://127.0.0.1:" + PORT),
+      headers: Config.string()
+        .table("headers").optional
+    })
+  )
+  > HF.Client(fetch)
+  > api(cfg)
 
 type LayerA<T> = T extends Layer<any, any, infer A> ? A : never
 

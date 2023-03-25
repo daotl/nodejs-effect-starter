@@ -1,10 +1,6 @@
 {
   "reject": [
-    "jwks-rsa",
-    "applicationinsights",
-    "faker",
-    "@types/faker",
-    "redis",
+    "jwks-rsa", "applicationinsights", "faker", "@types/faker", "redis",
     "@types/redis"
   ]
 }

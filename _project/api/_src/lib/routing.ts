@@ -1,37 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { BasicRequestEnv } from '@effect-app-boilerplate/messages/RequestLayers'
-import type { User } from '@effect-app-boilerplate/models/User'
-import { Role } from '@effect-app-boilerplate/models/User'
-import type { Compute } from '@effect-app/core/utils'
-import type { SupportedErrors } from '@effect-app/infra/api/defaultErrorHandler'
-import { defaultErrorHandler } from '@effect-app/infra/api/defaultErrorHandler'
-import type {
-  _E,
-  _R,
-  Request,
-} from '@effect-app/infra/api/express/schema/requestHandler'
-import type {
-  Flatten,
-  ReqFromSchema,
-  ReqHandler,
-  ResFromSchema,
-  RouteMatch,
-} from '@effect-app/infra/api/routing'
-import { handle, match } from '@effect-app/infra/api/routing'
-import { NotLoggedInError, UnauthorizedError } from '@effect-app/infra/errors'
-import { RequestContext } from '@effect-app/infra/RequestContext'
-import type {
-  GetRequest,
-  GetResponse,
-  ReqRes,
-  ReqResSchemed,
-} from '@effect-app/prelude/schema'
-import type express from 'express'
-import { CurrentUser, UserRepo } from '../services.js'
-import {
-  makeUserProfileFromUserHeader,
-  UserProfile,
-} from '../services/UserProfile.js'
+import { BasicRequestEnv } from "@effect-app-boilerplate/messages/RequestLayers"
+import type { User } from "@effect-app-boilerplate/models/User"
+import { Role } from "@effect-app-boilerplate/models/User"
+import type { Compute } from "@effect-app/core/utils"
+import type { SupportedErrors } from "@effect-app/infra/api/defaultErrorHandler"
+import { defaultErrorHandler } from "@effect-app/infra/api/defaultErrorHandler"
+import type { _E, _R, Request } from "@effect-app/infra/api/express/schema/requestHandler"
+import type { Flatten, ReqFromSchema, ReqHandler, ResFromSchema, RouteMatch } from "@effect-app/infra/api/routing"
+import { handle, match } from "@effect-app/infra/api/routing"
+import { NotLoggedInError, UnauthorizedError } from "@effect-app/infra/errors"
+import { RequestContext } from "@effect-app/infra/RequestContext"
+import type { GetRequest, GetResponse, ReqRes, ReqResSchemed } from "@effect-app/prelude/schema"
+import { TagTypeId } from "@effect-app/prelude/service"
+import type { EffectTypeId } from "@effect/io/Effect"
+import type express from "express"
+import { CurrentUser, UserRepo } from "../services.js"
+import { makeUserProfileFromUserHeader, UserProfile } from "../services/UserProfile.js"
 
 function RequestEnv(handler: { Request: any }) {
   return (
@@ -218,8 +203,8 @@ function handleRequestEnv<
     handler: {
       ...handler,
       h: (pars: any) =>
-        Debug.untraced((restore) =>
-          Effect.struct({
+        Debug.untraced(restore =>
+          Effect.all({
             context: RequestContext.Tag.access,
             user: CurrentUser.get.catchTag('NotLoggedInError', () =>
               Effect(null),
@@ -311,19 +296,39 @@ export interface CTX {
   user: User
 }
 
-type Service<T> = T extends Tag<infer S> ? S : never
+type Service<T> = T extends Effect<any, any, infer S> ? S : T extends Tag<infer S> ? S : never
+type ServiceR<T> = T extends Effect<infer R, any, any> ? R : T extends Tag<infer S> ? S : never
 type Values<T> = T extends { [s: string]: infer S } ? Service<S> : never
-type LowerFirst<S extends PropertyKey> = S extends `${infer First}${infer Rest}`
-  ? `${Lowercase<First>}${Rest}`
-  : S
-type LowerServices<T extends Record<string, Tag<any>>> = {
+type ValuesR<T> = T extends { [s: string]: infer S } ? ServiceR<S> : never
+
+type LowerFirst<S extends PropertyKey> = S extends `${infer First}${infer Rest}` ? `${Lowercase<First>}${Rest}` : S
+type LowerServices<T extends Record<string, Tag<any> | Effect<any, any, any>>> = {
   [key in keyof T as LowerFirst<key>]: Service<T[key]>
+}
+
+/**
+ * @tsplus static effect/io/Effect.Ops servicesOrEffectsWith
+ */
+export function accessLowerServicesAndEffects_<T extends Record<string, Tag<any> | Effect<any, any, any>>, A>(
+  services: T,
+  fn: (services: LowerServices<T>) => A
+) {
+  return Debug.untraced(() =>
+    (Effect.all(
+      services.$$.keys.reduce((prev, cur) => {
+        const svc = services[cur]!
+        prev[((cur as string)[0]!.toLowerCase() + (cur as string).slice(1)) as unknown as LowerFirst<typeof cur>] =
+          "_id" in svc && svc._id === TagTypeId ? Effect.service(svc) : services[cur]
+        return prev
+      }, {} as any)
+    ) as any as Effect<ValuesR<T>, never, LowerServices<T>>).map(fn)
+  )
 }
 
 export function matchFor<Rsc extends Record<string, any>>(rsc: Rsc) {
   const matchWithServices_ = <
     Key extends keyof Rsc,
-    SVC extends Record<string, Tag<any>>,
+    SVC extends Record<string, Tag<any> | Effect<any, any, any>>,
     R2,
     E extends SupportedErrors,
   >(
@@ -336,25 +341,22 @@ export function matchFor<Rsc extends Record<string, any>>(rsc: Rsc) {
   ) =>
     matchAction(
       rsc[action],
-      Effect.context<Values<SVC>>().flatMap((context) =>
-        Effect.servicesWith(
-          services,
-          (svc) => (req, ctx) =>
-            f(req, { ...ctx, ...(svc as any) }).provideSomeContextReal(context),
-        ),
-      ),
+      Effect.context<Values<SVC>>().flatMap(context =>
+        accessLowerServicesAndEffects_(services, svc => (req, ctx) =>
+          f(req, { ...ctx, ...svc as any }).provideSomeContextReal(context))
+      )
     )
 
   const matchWithServices: <Key extends keyof Rsc>(
-    action: Key,
-  ) => <SVC extends Record<string, Tag<any>>, R2, E extends SupportedErrors>(
+    action: Key
+  ) => <SVC extends Record<string, Tag<any> | Effect<any, any, any>>, R2, E extends SupportedErrors>(
     services: SVC,
     f: (
       req: ReqFromSchema<GetRequest<Rsc[Key]>>,
       ctx: Compute<LowerServices<SVC> & CTX, 'flat'>,
     ) => Effect<R2, E, ResFromSchema<GetResponse<Rsc[Key]>>>,
   ) => Effect<
-    Values<SVC>,
+    ValuesR<SVC>,
     never,
     (
       req: ReqFromSchema<GetRequest<Rsc[Key]>>,
@@ -437,31 +439,34 @@ export function matchFor<Rsc extends Record<string, any>>(rsc: Rsc) {
   > = (action) => (f) => matchWith_(action, f)
   type Keys = keyof Rsc
 
+  type Handler<K extends keyof Rsc, R> = (
+    req: ReqFromSchema<GetRequest<Rsc[K]>>,
+    ctx: CTX
+  ) => Effect<R, SupportedErrors, ResFromSchema<GetResponse<Rsc[K]>>>
+
+  type GetHandler<T> = T extends Handler<any, any> ? ReturnType<T> : never
+
   const controllers = <
-    R,
     THandlers extends {
-      [K in Keys]: (
-        req: ReqFromSchema<GetRequest<Rsc[K]>>,
-        ctx: CTX,
-      ) => Effect<any, SupportedErrors, ResFromSchema<GetResponse<Rsc[K]>>>
-    },
+      [K in Keys]: Effect<any, any, Handler<K, any>>
+    }
   >(
-    controllers: Effect<R, never, THandlers>,
+    controllers: THandlers
   ) => {
-    const handler = controllers.map((handlers) =>
+    const handler = Effect.all(controllers).map(handlers =>
       rsc.$$.keys.reduce((prev, cur) => {
         prev[cur] = handle(rsc[cur])(handlers[cur] as any)
         return prev
       }, {} as any),
     )
     return handler as Effect<
-      R,
-      never,
+      [THandlers[keyof THandlers]] extends [{ [EffectTypeId]: { _R: (_: never) => infer R } }] ? R : never,
+      [THandlers[keyof THandlers]] extends [{ [EffectTypeId]: { _E: (_: never) => infer E } }] ? E : never,
       {
         [K in Keys]: ReqHandler<
           ReqFromSchema<GetRequest<Rsc[K]>>,
-          _R<ReturnType<THandlers[K]>>,
-          _E<ReturnType<THandlers[K]>>,
+          _R<GetHandler<Effect.Success<THandlers[K]>>>,
+          _E<GetHandler<Effect.Success<THandlers[K]>>>,
           ResFromSchema<GetResponse<Rsc[K]>>,
           GetRequest<Rsc[K]>,
           GetResponse<Rsc[K]>,

@@ -26,7 +26,7 @@ export type LastName = ParsedShapeOfCustom<typeof LastName>
 /**
  * @tsplus type FullName
  */
-@useClassNameForSchema
+@useClassFeaturesForSchema
 export class FullName extends MNModel<
   FullName,
   FullName.ConstructorInput,
@@ -71,7 +71,7 @@ export type Role = ParsedShapeOfCustom<typeof Role>
  * @tsplus type User
  * @tsplus companion User
  */
-@useClassNameForSchema
+@useClassFeaturesForSchema
 export class User extends MNModel<
   User,
   User.ConstructorInput,
@@ -123,50 +123,22 @@ export type UserConstructor = typeof User
 // codegen:start {preset: model}
 //
 /* eslint-disable */
-// rome-ignore format: <explanation>
-export interface FullName {
-  readonly firstName: ReasonableString
-  readonly lastName: ReasonableString
-}
-// rome-ignore format: <explanation>
 export namespace FullName {
   /**
    * @tsplus type FullName.Encoded
+   * @tsplus companion FullName.Encoded/Ops
    */
-  export interface Encoded {
-    readonly firstName: string
-    readonly lastName: string
-  }
-  export const Encoded: EncodedOps = { $: {} }
-  /**
-   * @tsplus type FullName.Encoded/Ops
-   */
-  export interface EncodedOps {}
+  export class Encoded extends EncodedClass<typeof FullName>() {}
   export interface ConstructorInput
     extends ConstructorInputFromApi<typeof FullName> {}
   export interface Props extends GetProvidedProps<typeof FullName> {}
 }
-// rome-ignore format: <explanation>
-export interface User {
-  readonly displayName: ReasonableString
-  readonly id: StringId
-  readonly role: Role
-}
-// rome-ignore format: <explanation>
 export namespace User {
   /**
    * @tsplus type User.Encoded
+   * @tsplus companion User.Encoded/Ops
    */
-  export interface Encoded {
-    readonly displayName: string
-    readonly id: string
-    readonly role: Role
-  }
-  export const Encoded: EncodedOps = { $: {} }
-  /**
-   * @tsplus type User.Encoded/Ops
-   */
-  export interface EncodedOps {}
+  export class Encoded extends EncodedClass<typeof User>() {}
   export interface ConstructorInput
     extends ConstructorInputFromApi<typeof User> {}
   export interface Props extends GetProvidedProps<typeof User> {}

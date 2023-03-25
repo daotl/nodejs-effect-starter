@@ -13,8 +13,7 @@ module.exports = function (dir, forceTS) {
   return {
     ...base,
     parser: 'vue-eslint-parser',
-    // extends: '@daotl/vue/typescript',
-    extends: '../../node_modules/@daotl/eslint-config/typescript.js',
+    extends: '../../node_modules/@daotl/eslint-config-vue/typescript.js',
     overrides: [
       {
         files: '*.{ts,tsx,vue}',

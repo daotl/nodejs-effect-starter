@@ -39,9 +39,8 @@ export const events = Ex.get('/events', (req, res) =>
         : req.headers['x-store-id']
       : 'primary'
 
-    $(Effect.logInfo('$ start listening to events'))
-    $(
-      Effect.schedule(Schedule.spaced(Duration.seconds(15)))(
+      $(Effect.logInfo("$ start listening to events"))
+      $(
         Effect.sync(() => {
           try {
             // console.log("keep alive")
@@ -51,31 +50,28 @@ export const events = Ex.get('/events', (req, res) =>
             console.error('keepAlive Error', err)
             throw err
           }
-        }),
-      ).forkScoped,
-    )
+        })
+          .schedule(Schedule.fixed(Duration.seconds(15)))
+          .forkScoped
+      )
 
-    $(
-      Events.accessWithEffect(({ subscribe }) =>
-        subscribe.flatMap(
-          (_) =>
-            _.take().flatMap((_) =>
-              Effect(() => {
-                if (namespace !== _.namespace) return
+      $(
+        Events.accessWithEffect(({ stream }) =>
+          stream
+            .filter(_ => _.namespace === namespace)
+            .runForEach(_ =>
+              Effect(
                 writeAndLogError(
-                  `id: ${_.evt.id}\ndata: ${JSON.stringify(
-                    ClientEvents.Encoder(_.evt),
-                  )}\n\n`,
+                  `id: ${_.evt.id}\ndata: ${JSON.stringify(ClientEvents.Encoder(_.evt))}\n\n`
                 )
-              }),
-            ).forever.forkScoped,
-        ),
-      ),
-    )
-    $(
-      Effect.async<never, never, void>((cb) => {
-        res.on('close', () => {
-          console.log('client dropped me res CLOSE')
+              )
+            )
+            .forkScoped
+        )
+      )
+      $(Effect.async<never, never, void>(cb => {
+        res.on("close", () => {
+          console.log("client dropped me res CLOSE")
           cb(Effect(void 0 as void))
           res.end()
         })

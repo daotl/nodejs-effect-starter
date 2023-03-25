@@ -6,7 +6,7 @@ import * as R from './routes.js'
 import { Operations, StoreMaker, UserRepo } from './services.js'
 import { Events } from './services/Events.js'
 
-const routes = Effect.struct(R)
+const routes = Effect.all(R)
 
 export function api(cfg: ApiMainConfig) {
   const logServerStart = Effect(
@@ -34,5 +34,7 @@ export function api(cfg: ApiMainConfig) {
     Operations.Live >
     Ex.LiveExpress(cfg.host, cfg.port)
 
-  return services > program.toScopedDiscardLayer
+  return services
+    > program
+      .toLayerScopedDiscard
 }

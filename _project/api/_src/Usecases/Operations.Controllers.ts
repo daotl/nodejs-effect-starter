@@ -1,5 +1,6 @@
-import { Operations } from '@/services.js'
-import { OperationsRsc } from '@effect-app-boilerplate/resources'
+import { OperationsRsc } from "@effect-app-boilerplate/resources"
+import { matchFor } from "api/lib/routing.js"
+import { Operations } from "api/services.js"
 
 const { controllers, matchWithServices } = matchFor(OperationsRsc)
 
@@ -8,4 +9,4 @@ const Find = matchWithServices('Find')(
   ({ id }, { operations }) => operations.find(id).map((_) => _.getOrNull),
 )
 
-export const OperationsControllers = controllers(Effect.struct({ Find }))
+export const OperationsControllers = controllers({ Find })
