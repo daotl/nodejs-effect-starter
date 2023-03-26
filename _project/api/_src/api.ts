@@ -34,7 +34,5 @@ export function api(cfg: ApiMainConfig) {
     Operations.Live >
     Ex.LiveExpress(cfg.host, cfg.port)
 
-  return services
-    > program
-      .toLayerScopedDiscard
+  return services > program.toLayerScopedDiscard
 }

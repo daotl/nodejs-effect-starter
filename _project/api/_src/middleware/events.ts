@@ -39,39 +39,40 @@ export const events = Ex.get('/events', (req, res) =>
         : req.headers['x-store-id']
       : 'primary'
 
-      $(Effect.logInfo("$ start listening to events"))
-      $(
-        Effect.sync(() => {
-          try {
-            // console.log("keep alive")
-            // writeAndLogError("id: keep-alive\ndata: \"keep-alive\"\n\n")
-            writeAndLogError(':keep-alive\n\n')
-          } catch (err) {
-            console.error('keepAlive Error', err)
-            throw err
-          }
-        })
-          .schedule(Schedule.fixed(Duration.seconds(15)))
-          .forkScoped
-      )
+    $(Effect.logInfo('$ start listening to events'))
+    $(
+      Effect.sync(() => {
+        try {
+          // console.log("keep alive")
+          // writeAndLogError("id: keep-alive\ndata: \"keep-alive\"\n\n")
+          writeAndLogError(':keep-alive\n\n')
+        } catch (err) {
+          console.error('keepAlive Error', err)
+          throw err
+        }
+      }).schedule(Schedule.fixed(Duration.seconds(15))).forkScoped,
+    )
 
-      $(
-        Events.accessWithEffect(({ stream }) =>
+    $(
+      Events.accessWithEffect(
+        ({ stream }) =>
           stream
-            .filter(_ => _.namespace === namespace)
-            .runForEach(_ =>
+            .filter((_) => _.namespace === namespace)
+            .runForEach((_) =>
               Effect(
                 writeAndLogError(
-                  `id: ${_.evt.id}\ndata: ${JSON.stringify(ClientEvents.Encoder(_.evt))}\n\n`
-                )
-              )
-            )
-            .forkScoped
-        )
-      )
-      $(Effect.async<never, never, void>(cb => {
-        res.on("close", () => {
-          console.log("client dropped me res CLOSE")
+                  `id: ${_.evt.id}\ndata: ${JSON.stringify(
+                    ClientEvents.Encoder(_.evt),
+                  )}\n\n`,
+                ),
+              ),
+            ).forkScoped,
+      ),
+    )
+    $(
+      Effect.async<never, never, void>((cb) => {
+        res.on('close', () => {
+          console.log('client dropped me res CLOSE')
           cb(Effect(void 0 as void))
           res.end()
         })

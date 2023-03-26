@@ -3,11 +3,14 @@ import { BaseConfig } from '@effect-app-boilerplate/messages/config'
 const STORAGE_VERSION = '1'
 
 const StorageConfig = Config.all({
-  url: Config.secretURL("url")
-    .withDefault(ConfigSecretURL.fromString("mem://"))
-    .nested("storage"),
-  dbName: BaseConfig.map(({ env, serviceName }) =>
-    `${serviceName}${env === "prod" ? "" : env === "demo" ? "-demo" : "-dev"}`
+  url: Config.secretURL('url')
+    .withDefault(ConfigSecretURL.fromString('mem://'))
+    .nested('storage'),
+  dbName: BaseConfig.map(
+    ({ env, serviceName }) =>
+      `${serviceName}${
+        env === 'prod' ? '' : env === 'demo' ? '-demo' : '-dev'
+      }`,
   ),
   prefix: Config.string('prefix')
     .nested('storage')
@@ -19,8 +22,8 @@ const StorageConfig = Config.all({
 })
 
 export const ApiConfig = Config.all({
-  host: Config.string("host").withDefault("0.0.0.0"),
-  port: Config.integer("port").withDefault(3610),
+  host: Config.string('host').withDefault('0.0.0.0'),
+  port: Config.integer('port').withDefault(3610),
 
   fakeData: Config.string('fakeData').withDefault(''),
   fakeUsers: Config.string('fakeUsers').withDefault('sample'),

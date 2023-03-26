@@ -1,5 +1,5 @@
-import type { User } from "@effect-app-boilerplate/models/User"
-import { CurrentUser } from "./service.js"
+import type { User } from '@effect-app-boilerplate/models/User'
+import { CurrentUser } from './service.js'
 
 /**
  * @tsplus static CurrentUser.Ops get
@@ -12,13 +12,14 @@ export const GetCurrentUser = Effect.serviceWithEffect(
 /**
  * @tsplus static CurrentUser.Ops with
  */
-export const with_ = <B>(f: (x: User) => B) => Effect.serviceWithEffect(CurrentUser, _ => _.get.map(f))
+export const with_ = <B>(f: (x: User) => B) =>
+  Effect.serviceWithEffect(CurrentUser, (_) => _.get.map(f))
 
 /**
  * @tsplus static CurrentUser.Ops withEffect
  */
 export const withEffect = <R, E, B>(f: (x: User) => Effect<R, E, B>) =>
-  Effect.serviceWithEffect(CurrentUser, _ => _.get.flatMap(f))
+  Effect.serviceWithEffect(CurrentUser, (_) => _.get.flatMap(f))
 
 /** @tsplus static CurrentUser.Ops find */
 export const FindCurrentUser = CurrentUser.accessWithEffect((_) =>

@@ -36,7 +36,7 @@ importers:
     specifiers:
       '@babel/cli': ^7.21.0
       '@daotl/effect-app-eslint-codegen-model': ^0.11.0
-      '@daotl/eslint-config-vue': 1.0.0-alpha.5
+      '@daotl/eslint-config-vue': 1.0.0-alpha.6
       '@daotl/rome-config': 0.0.1-alpha.4
       '@dprint/typescript': ^0.84.0
       '@effect-app/cli': ^0.7.0
@@ -90,7 +90,7 @@ importers:
     devDependencies:
       '@babel/cli': 7.21.0
       '@daotl/effect-app-eslint-codegen-model': 0.11.0
-      '@daotl/eslint-config-vue': 1.0.0-alpha.5_qgahalmm4axt43hsqt33dtmuc4
+      '@daotl/eslint-config-vue': 1.0.0-alpha.6_qgahalmm4axt43hsqt33dtmuc4
       '@daotl/rome-config': 0.0.1-alpha.4_rome@11.0.0
       '@dprint/typescript': 0.84.0
       '@effect-app/cli': 0.7.0
@@ -2344,11 +2344,11 @@ packages:
       - supports-color
     dev: true
 
-  /@daotl/eslint-config-vue/1.0.0-alpha.5_qgahalmm4axt43hsqt33dtmuc4:
-    resolution: {integrity: sha512-KOPK0KBhNDhl7zhQtUyVgSNPGIDpPV5LUV6mOR7InDEq00ppvU5J466f8cNh++6H8msxSOHSBWk8a0szvHuSpw==}
+  /@daotl/eslint-config-vue/1.0.0-alpha.6_qgahalmm4axt43hsqt33dtmuc4:
+    resolution: {integrity: sha512-PVauDbdGE+Kbji8AGo/+V+bVi1LqG4Q3cc1PsOOn/0kcxpOXsN7SlPDT7X2REQKjsgYkUm/LGcLkZ9iokJGqIQ==}
     dependencies:
       '@antfu/eslint-config-vue': 0.35.2_yfdw2k5kdeu27r66aqnyq6k4gu
-      '@daotl/eslint-config': 1.0.0-alpha.5_i2gtpbvuh2nfvwg2noezdz3kri
+      '@daotl/eslint-config': 1.0.0-alpha.6_i2gtpbvuh2nfvwg2noezdz3kri
       '@vue/eslint-config-typescript': 11.0.2_tirwtuuf3z3erguoiu6n3qdhyu
       eslint: 8.36.0
       eslint-plugin-mdx: 2.0.5_eslint@8.36.0
@@ -2365,8 +2365,8 @@ packages:
       - webpack
     dev: true
 
-  /@daotl/eslint-config/1.0.0-alpha.5_i2gtpbvuh2nfvwg2noezdz3kri:
-    resolution: {integrity: sha512-JB107onzb/+XaD8si7kFXzoArt1ba/k3vYXHOnxNNWI52OjxHEL9MNWZ6Tu+svcOlGiHesUjxDP4xFBNbxdOPg==}
+  /@daotl/eslint-config/1.0.0-alpha.6_i2gtpbvuh2nfvwg2noezdz3kri:
+    resolution: {integrity: sha512-J1S72IhMH2kq9D9Wf161h7xXwNLzTz01YreZYJ5XMbqFCboqFHGowGFBnEh66pyMabrY3niBhwUJoFbUjCXO6A==}
     peerDependencies:
       dprint: '>=0.34.5'
       eslint: '>=8.34.0'
@@ -5124,7 +5124,7 @@ packages:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
   /array-find/1.0.0:
-    resolution: {integrity: sha512-kO/vVCacW9mnpn3WPWbTVlEnOabK2L7LWi2HViURtCM46y1zb6I8UMjx4LgbiqadTgHnLInUronwn3ampNTJtQ==}
+    resolution: {integrity: sha1-bI4obRHtdoMn+OYuzuhzU8o+eLg=}
     dev: true
 
   /array-flatten/1.1.1:
@@ -9896,7 +9896,7 @@ packages:
     dev: false
 
   /memory-fs/0.2.0:
-    resolution: {integrity: sha512-+y4mDxU4rvXXu5UDSGCGNiesFmwCHuefGMoPCO1WYucNYj7DsLqrFaa2fXVI0H+NNiPTwwzKwspn9yTZqUGqng==}
+    resolution: {integrity: sha1-8rslNovBIeORwlIN6Slpyu4KApA=}
     dev: true
 
   /memory-fs/0.5.0:

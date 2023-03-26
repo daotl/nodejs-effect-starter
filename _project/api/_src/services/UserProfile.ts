@@ -15,14 +15,20 @@ export const UserProfileId = Symbol()
  * @tsplus type UserProfile
  * @tsplus companion UserProfile.Ops
  */
-export abstract class UserProfile extends ServiceTaggedClass<UserProfile>()(UserProfileId) {
+export abstract class UserProfile extends ServiceTaggedClass<UserProfile>()(
+  UserProfileId,
+) {
   abstract get: Effect<never, NotLoggedInError, UserProfileScheme>
 }
 
 export const LiveUserProfile = (profile: UserProfileScheme | null) =>
-  Effect(UserProfile.make({
-    get: Option.fromNullable(profile).encaseInEffect(() => new NotLoggedInError())
-  })).toLayer(UserProfile)
+  Effect(
+    UserProfile.make({
+      get: Option.fromNullable(profile).encaseInEffect(
+        () => new NotLoggedInError(),
+      ),
+    }),
+  ).toLayer(UserProfile)
 
 const userProfileFromJson = json['>>>'](UserProfileScheme)
 const userProfileFromJWT = jwt['>>>'](UserProfileScheme)

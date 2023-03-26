@@ -1,6 +1,6 @@
-import { User } from "@effect-app-boilerplate/models/User"
-import { UserProfile } from "../UserProfile.js"
-import { RepositoryBaseImpl } from "./RepositoryBase.js"
+import { User } from '@effect-app-boilerplate/models/User'
+import { UserProfile } from '../UserProfile.js'
+import { RepositoryBaseImpl } from './RepositoryBase.js'
 
 export interface UserPersistenceModel extends User.Encoded {
   _etag: string | undefined
@@ -27,10 +27,10 @@ export type UserSeed = 'sample' | ''
  * @tsplus companion UserRepo.Ops
  */
 export class UserRepo extends RepositoryBaseImpl<UserRepo>()<UserPersistenceModel>()(
-  "User",
+  'User',
   User,
-  pm => pm,
-  (e, _etag) => ({ ...e, _etag })
+  (pm) => pm,
+  (e, _etag) => ({ ...e, _etag }),
 ) {}
 
 export const usersWhere = UserRepo.where
@@ -40,13 +40,12 @@ export const usersWhere = UserRepo.where
  */
 export function LiveUserRepo(seed: UserSeed) {
   const makeInitial = Effect.sync(() => {
-    const items = seed === "sample" ? fakeUsers : []
+    const items = seed === 'sample' ? fakeUsers : []
     return items
   })
   const publishEvents = (_: Iterable<never>) => Effect.unit
-  return UserRepo
-    .makeStore(makeInitial)
-    .map(_ => new UserRepo(_, publishEvents))
+  return UserRepo.makeStore(makeInitial)
+    .map((_) => new UserRepo(_, publishEvents))
     .toLayer(UserRepo)
 }
 

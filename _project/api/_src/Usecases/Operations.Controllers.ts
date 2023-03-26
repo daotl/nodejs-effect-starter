@@ -1,6 +1,6 @@
-import { OperationsRsc } from "@effect-app-boilerplate/resources"
-import { matchFor } from "api/lib/routing.js"
-import { Operations } from "api/services.js"
+import { OperationsRsc } from '@effect-app-boilerplate/resources'
+import { matchFor } from 'api/lib/routing.js'
+import { Operations } from 'api/services.js'
 
 const { controllers, matchWithServices } = matchFor(OperationsRsc)
 
