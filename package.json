@@ -4,12 +4,12 @@
   "pnpm": {
     "patchedDependencies": {
       "@effect/language-service@0.0.19": "patches/@effect__language-service@0.0.19.patch",
-      "@playwright/test@1.31.2": "patches/@playwright+test+1.31.2.patch",
-      "@typescript-eslint/scope-manager@5.55.0": "patches/@typescript-eslint__scope-manager@5.55.0.patch",
+      "@playwright/test@1.32.1": "patches/@playwright+test+1.32.1.patch",
+      "@typescript-eslint/scope-manager@5.56.0": "patches/@typescript-eslint__scope-manager@5.56.0.patch",
       "eslint-plugin-codegen@0.17.0": "patches/eslint-plugin-codegen@0.17.0.patch",
       "typescript@5.0.0-tsplus.20230224": "patches/typescript@5.0.0-tsplus.20230224.patch",
       "date-fns@2.29.3": "patches/date-fns@2.29.3.patch",
-      "@fp-ts/optic@0.4.0": "patches/@fp-ts__optic@0.4.0.patch"
+      "@fp-ts/optic@0.6.0": "patches/@fp-ts__optic@0.6.0.patch"
     }
   },
   "scripts": {
@@ -20,7 +20,8 @@
     "upgrade": "echo hi",
     "scan": "pnpm esw -w --fix _project/api/_src/Usecases.ts _project/resources/_src/Resources.ts _project/resources/_src/Resources/*.ts",
     "autofix": "NODE_OPTIONS=--max-old-space-size=6144 pnpm all autofix",
-    "lint": "rome format --write . && rome check --apply .",
+    "lint": "rome format . && rome check .",
+    "lint:fix": "rome format --write . && rome check --apply .",
     "circular:dist": "pnpm all circular:dist",
     "start": "concurrently -k -p \"[{name}]\" -n \"API,Frontend\" -c \"cyan.bold,green.bold,blue.bold\" \"pnpm start:api\" \"pnpm start:frontend\"",
     "start:api": "cd _project/api && pnpm start",
@@ -44,10 +45,8 @@
     "libs": "pnpm all --workspace-concurrency 1 --filter \"@effect-app/*\"",
     "circular-api": "pnpm api circular",
     "circular-packages": "pnpm packages circular",
-    "lint-api": "pnpm api lint",
     "lint-e2e": "cd e2e && pnpm lint",
     "lint-frontend": "cd _project/frontend-nuxt && pnpm lint",
-    "lint-packages": "pnpm packages lint",
     "test-packages": "pnpm packages test:run",
     "testsuite-packages-manual": "cd _project/models && pnpm testsuite && cd ../resources && pnpm testsuite && cd ../messages && pnpm testsuite",
     "watch-packages": "pnpm packages build && pnpm packages watch",
@@ -58,40 +57,39 @@
     "nnm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && pnpm i"
   },
   "resolutions": {
-    "@effect/io": "^0.8.0",
-    "@effect/data": "^0.4.1",
+    "@effect/io": "^0.12.0",
     "@types/node": "~18.11.11",
     "@types/react": "^18.0.26",
     "date-fns": "^2.29.3",
     "http-proxy": "npm:http-proxy-node16@1.0.0"
   },
   "dependencies": {
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.0.29",
     "cross-env": "^7.0.3",
-    "fast-check": "^3.7.0",
+    "fast-check": "^3.7.1",
     "patch-package": "^6.5.1",
     "ts-node": "^10.9.1",
-    "vite-node": "^0.29.2"
+    "vite-node": "^0.29.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@daotl/effect-app-eslint-codegen-model": "^0.11.0",
     "@daotl/eslint-config-vue": "1.0.0-alpha.5",
     "@daotl/rome-config": "0.0.1-alpha.4",
-    "@dprint/typescript": "^0.83.0",
-    "@effect-app/cli": "^0.5.0",
-    "@effect-app/eslint-codegen-model": "^0.15.1",
-    "@effect-app/prelude": "^0.26.1",
-    "@effect-app/core": "^0.33.0",
-    "@effect-app/compiler": "^0.15.0",
+    "@dprint/typescript": "^0.84.0",
+    "@effect-app/cli": "^0.7.0",
+    "@effect-app/eslint-codegen-model": "^0.16.0",
+    "@effect-app/prelude": "^0.29.1",
+    "@effect-app/core": "^0.36.0",
+    "@effect-app/compiler": "^0.17.0",
     "@effect/language-service": "^0.0.19",
     "@tsconfig/strictest": "^1.0.2",
     "@tsplus/installer": "0.0.171",
     "@types/lodash": "^4.14.191",
-    "@types/node": "~18.15.3",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
-    "@typescript-eslint/scope-manager": "^5.55.0",
+    "@types/node": "~18.15.9",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@typescript-eslint/scope-manager": "^5.56.0",
     "babel-plugin-replace-import-extension": "^1.1.3",
     "concurrently": "^7.6.0",
     "dprint": "^0.35.3",
@@ -101,8 +99,8 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-watch": "^8.0.0",
     "madge": "^6.0.0",
-    "nodemon": "^2.0.21",
-    "npm-check-updates": "^16.7.12",
+    "nodemon": "^2.0.22",
+    "npm-check-updates": "^16.8.0",
     "prebuild-install": "^7.1.1",
     "rome": "^11.0.0",
     "ts-toolbelt": "^9.6.0",
@@ -111,8 +109,8 @@
     "tsconfig-paths": "^4.1.2",
     "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz",
     "typescript-transform-paths": "^3.4.6",
-    "unplugin-auto-import": "^0.15.1",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.2"
+    "unplugin-auto-import": "^0.15.2",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.7"
   }
 }
