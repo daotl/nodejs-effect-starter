@@ -18,7 +18,7 @@ const enforceSingleVersion = [
 ]
 
 function afterAllResolved(lockfile, context) {
-  context.log("Checking duplicate packages")
+  context.log('Checking duplicate packages')
   const packagesKeys = Object.keys(lockfile.packages)
   const found = {}
   for (let p of packagesKeys) {
@@ -60,7 +60,7 @@ module.exports = {
     // Temporary disabled for causing errors for unknown reason:
     //   ERROR  @effect-app/prelude found 2 times
     //   @effect-app/infra-adapters found 2 times
-    // afterAllResolved,
+    afterAllResolved,
     readPackage,
   },
 }

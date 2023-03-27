@@ -1,6 +1,7 @@
 {
   "extends": "./node_modules/@tsconfig/node18-strictest-esm/tsconfig.json",
   "compilerOptions": {
+    "tsPlusConfig": "./tsplus.config.json",
     "module": "ESNext",
     "lib": [
       "esnext"

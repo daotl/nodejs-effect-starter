@@ -1,5 +1,11 @@
 lockfileVersion: 5.4
 
+overrides:
+  '@effect/data': ^0.5.1
+  '@effect/io': ^0.12.0
+  '@types/node': ~18.11.11
+  date-fns: ^2.29.3
+
 patchedDependencies:
   '@effect/language-service@0.0.19':
     hash: izp2ue34jjv4swyrhg2ux4ha3e
@@ -24,7 +30,6 @@ specifiers:
   '@babel/cli': ^7.21.0
   '@daotl/effect-app-eslint-codegen-model': ^0.11.0
   '@daotl/rome-config': 0.0.1-alpha.4
-  '@dprint/typescript': ^0.84.0
   '@effect-app/cli': ^0.7.0
   '@effect-app/compiler': ^0.17.0
   '@effect-app/core': ^0.36.0
@@ -39,14 +44,13 @@ specifiers:
   '@tsconfig/node18-strictest-esm': ^1.0.1
   '@tsplus/installer': 0.0.171
   '@types/lodash': ^4.14.191
-  '@types/node': ~18.15.10
+  '@types/node': ~18.11.11
   '@typescript-eslint/eslint-plugin': ^5.56.0
   '@typescript-eslint/parser': ^5.56.0
   '@typescript-eslint/scope-manager': ^5.56.0
   babel-plugin-replace-import-extension: ^1.1.3
   concurrently: ^7.6.0
   cross-env: ^7.0.3
-  dprint: ^0.35.3
   enhanced-resolve: ^5.12.0
   eslint: ^8.36.0
   eslint-plugin-codegen: ^0.17.0
@@ -81,22 +85,20 @@ devDependencies:
   '@babel/cli': 7.21.0
   '@daotl/effect-app-eslint-codegen-model': 0.11.0
   '@daotl/rome-config': 0.0.1-alpha.4_rome@11.0.0
-  '@dprint/typescript': 0.84.0
   '@effect-app/cli': 0.7.0
-  '@effect-app/compiler': 0.17.0_@types+node@18.15.10
+  '@effect-app/compiler': 0.17.0_@types+node@18.11.19
   '@effect-app/eslint-codegen-model': 0.16.0
   '@effect/language-service': 0.0.19_izp2ue34jjv4swyrhg2ux4ha3e
   '@tsconfig/node18-strictest-esm': 1.0.1
-  '@tsplus/installer': 0.0.171_ugejn2q6274nlnls4ljhqh3ehm
+  '@tsplus/installer': 0.0.171_zvhgg36a35vwcamhb77dcu4mv4
   '@types/lodash': 4.14.191
-  '@types/node': 18.15.10
+  '@types/node': 18.11.19
   '@typescript-eslint/eslint-plugin': 5.56.0_eo62h2e7k6s6u2updfopcqulga
   '@typescript-eslint/parser': 5.56.0_2xiethmxne2qdl63m6ldxykf3m
   '@typescript-eslint/scope-manager': 5.56.0_tp5r7mwyjl4dxldk2tuwbgrsum
   babel-plugin-replace-import-extension: 1.1.3
   concurrently: 7.6.0
   cross-env: 7.0.3
-  dprint: 0.35.3
   enhanced-resolve: 5.12.0
   eslint: 8.36.0
   eslint-plugin-codegen: 0.17.0_3ogk7peuefdu45q3hbzcgdiuna
@@ -107,7 +109,7 @@ devDependencies:
   npm-check-updates: 16.8.0
   prebuild-install: 7.1.1
   rome: 11.0.0
-  ts-node: 10.9.1_ugejn2q6274nlnls4ljhqh3ehm
+  ts-node: 10.9.1_zvhgg36a35vwcamhb77dcu4mv4
   ts-transform-paths: 3.0.0
   tsc-watch: 6.0.0_noqli5mnrg467zyaewisefordu
   tsconfig-paths: 4.1.2
@@ -571,10 +573,6 @@ packages:
       node-source-walk: 5.0.1
     dev: true
 
-  /@dprint/typescript/0.84.0:
-    resolution: {integrity: sha512-DvPLJIy6rMENkg59Q11EKMsVHfV5UkhZRZq0/Fb04ScR90UTlhro1Y2TQCJBccPoHsICc1El5dbso5EaCI5F6A==}
-    dev: true
-
   /@effect-app/cli/0.7.0:
     resolution: {integrity: sha512-OWGhVAK82LNWwU10MTublbsB0oIlN4Qr3mkX2QtMVS0c2xRQ8tlt6Kto4U6l632Jh72yGgNHwyEgCB/nckIs+Q==}
     hasBin: true
@@ -582,11 +580,11 @@ packages:
       node-watch: 0.7.3
     dev: true
 
-  /@effect-app/compiler/0.17.0_@types+node@18.15.10:
+  /@effect-app/compiler/0.17.0_@types+node@18.11.19:
     resolution: {integrity: sha512-ftCLJt4vFJQ5ysC8ZVPXVRGcmFLQvpJfU+u2+Up22VT/kr6+p5cQcz2CY4VzJxx668K9CBVNcLMiTkBSs/B8nA==}
     dependencies:
       '@rollup/pluginutils': 5.0.2
-      vite: 4.2.1_@types+node@18.15.10
+      vite: 4.2.1_@types+node@18.11.19
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -712,20 +710,10 @@ packages:
     resolution: {integrity: sha512-ywgRui90ugXsSDggthqHFWA4unsD0XBsKoW63mXWFnya7piEDWRhqa9oXIXqwzA6m1WOY1L+OQXxovw+OJpKgQ==}
     dev: false
 
-  /@effect/data/0.6.0:
-    resolution: {integrity: sha512-YMdFrQPd7jDxejmNKDDrZnjSzbM+RY3dPJ94VYMDNOYBdcQTj61kk5C/HUdddlbNdI5ukiSWO1CaZlnVU9gPLA==}
-    dev: false
-
-  /@effect/io/0.10.0:
-    resolution: {integrity: sha512-zNST2PjJlbpzle/zCUpui3Ttp8By8Z9gDfRpy6o//ejgL2CCd0G4VflZ74Hy3L8w/GLCVUXput52DfB5bxEsqA==}
-    dependencies:
-      '@effect/data': 0.5.1
-    dev: false
-
   /@effect/io/0.12.2:
     resolution: {integrity: sha512-eEJL7OQ+/RFn/CjHgBIrX+y+mR6AKdEADljzm6mKjWlZcn/w+1O1mUzoTG8NN70Zxlv+u1UQnE97UWyFFmvORg==}
     dependencies:
-      '@effect/data': 0.6.0
+      '@effect/data': 0.5.1
     dev: false
 
   /@effect/language-service/0.0.19_izp2ue34jjv4swyrhg2ux4ha3e:
@@ -740,7 +728,7 @@ packages:
     resolution: {integrity: sha512-Y5CkZXv1M6EAbuqa1tQxL6qeeDlxRchUZq+XHc7kb/sko9Za+G/WyRqoEWm0VmIcyWh6RCzpEsN6m3izXqIT0w==}
     dependencies:
       '@effect/data': 0.5.1
-      '@effect/io': 0.10.0
+      '@effect/io': 0.12.2
     dev: false
 
   /@esbuild/android-arm/0.17.14:
@@ -1025,7 +1013,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.15.10
+      '@types/node': 18.11.19
       '@types/yargs': 15.0.15
       chalk: 4.1.2
     dev: true
@@ -1327,14 +1315,14 @@ packages:
     resolution: {integrity: sha512-cHzmAqw7CMbyqROWeBgVhard3F2V6zxOSJnQ4E6SJWruXD5ypuP9/QKekwBdfXQ4oUTaizIICKIwb+v3v33t0w==}
     dev: true
 
-  /@tsplus/installer/0.0.171_ugejn2q6274nlnls4ljhqh3ehm:
+  /@tsplus/installer/0.0.171_zvhgg36a35vwcamhb77dcu4mv4:
     resolution: {integrity: sha512-RcJvTpho9KlLX3wm0DkvH4GV5m+UzyoWsXS4Ci4JLbNkS0eFcnrVmEkGKk7izc6XmHPNomEA9PUcPII79bHxGQ==}
     hasBin: true
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
       tar: 6.1.13
-      ts-node: 10.9.1_ugejn2q6274nlnls4ljhqh3ehm
+      ts-node: 10.9.1_zvhgg36a35vwcamhb77dcu4mv4
       zlib: 1.0.5
     transitivePeerDependencies:
       - '@swc/core'
@@ -1371,7 +1359,7 @@ packages:
   /@types/is-buffer/2.0.0:
     resolution: {integrity: sha512-0f7N/e3BAz32qDYvgB4d2cqv1DqUwvGxHkXsrucICn8la1Vb6Yl6Eg8mPScGwUiqHJeE7diXlzaK+QMA9m4Gxw==}
     dependencies:
-      '@types/node': 18.15.10
+      '@types/node': 18.11.19
     dev: false
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -1402,8 +1390,8 @@ packages:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
-  /@types/node/18.15.10:
-    resolution: {integrity: sha512-9avDaQJczATcXgfmMAW3MIWArOO7A+m90vuCFLr8AotWf8igO/mRoYukrk2cqZVtv38tHs33retzHEilM7FpeQ==}
+  /@types/node/18.11.19:
+    resolution: {integrity: sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -1902,10 +1890,6 @@ packages:
       electron-to-chromium: 1.4.340
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
-    dev: true
-
-  /buffer-crc32/0.2.13:
-    resolution: {integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=}
     dev: true
 
   /buffer-from/1.1.2:
@@ -2645,17 +2629,6 @@ packages:
       is-obj: 2.0.0
     dev: true
 
-  /dprint/0.35.3:
-    resolution: {integrity: sha512-BWFdr2Ury2dtqyjaTI9P5vCpb1yn5laLfO3Yo5egrrDlK2A2mv6CSpe/oK2cuOPESMY1JT2dubMv2dPDiJfMnA==}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      https-proxy-agent: 5.0.1
-      yauzl: 2.10.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
@@ -3115,12 +3088,6 @@ packages:
     resolution: {integrity: sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==}
     dependencies:
       reusify: 1.0.4
-    dev: true
-
-  /fd-slicer/1.1.0:
-    resolution: {integrity: sha1-JcfInLH5B3+IkbvmHY85Dq4lbx4=}
-    dependencies:
-      pend: 1.2.0
     dev: true
 
   /file-entry-cache/6.0.1:
@@ -5107,10 +5074,6 @@ packages:
       through: 2.3.8
     dev: true
 
-  /pend/1.2.0:
-    resolution: {integrity: sha1-elfrVQpng/kRUzH89GY9XI4AelA=}
-    dev: true
-
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
     dev: true
@@ -6193,7 +6156,7 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /ts-node/10.9.1_ugejn2q6274nlnls4ljhqh3ehm:
+  /ts-node/10.9.1_zvhgg36a35vwcamhb77dcu4mv4:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -6212,7 +6175,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.15.10
+      '@types/node': 18.11.19
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -6607,7 +6570,7 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
-  /vite-node/0.29.7_@types+node@18.15.10:
+  /vite-node/0.29.7_@types+node@18.11.19:
     resolution: {integrity: sha512-PakCZLvz37yFfUPWBnLa1OYHPCGm5v4pmRrTcFN4V/N/T3I6tyP3z07S//9w+DdeL7vVd0VSeyMZuAh+449ZWw==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -6617,7 +6580,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.2.1_@types+node@18.15.10
+      vite: 4.2.1_@types+node@18.11.19
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6628,7 +6591,7 @@ packages:
       - terser
     dev: true
 
-  /vite/4.2.1_@types+node@18.15.10:
+  /vite/4.2.1_@types+node@18.11.19:
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -6653,7 +6616,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.15.10
+      '@types/node': 18.11.19
       esbuild: 0.17.14
       postcss: 8.4.21
       resolve: 1.22.1
@@ -6692,7 +6655,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.4
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.15.10
+      '@types/node': 18.11.19
       '@vitest/expect': 0.29.7
       '@vitest/runner': 0.29.7
       '@vitest/spy': 0.29.7
@@ -6711,8 +6674,8 @@ packages:
       tinybench: 2.4.0
       tinypool: 0.4.0
       tinyspy: 1.1.1
-      vite: 4.2.1_@types+node@18.15.10
-      vite-node: 0.29.7_@types+node@18.15.10
+      vite: 4.2.1_@types+node@18.11.19
+      vite-node: 0.29.7_@types+node@18.11.19
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
@@ -6888,13 +6851,6 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
-    dev: true
-
-  /yauzl/2.10.0:
-    resolution: {integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=}
-    dependencies:
-      buffer-crc32: 0.2.13
-      fd-slicer: 1.1.0
     dev: true
 
   /yn/3.1.1:
