@@ -29,7 +29,6 @@ patchedDependencies:
 
 specifiers:
   '@babel/cli': ^7.21.0
-  '@daotl/effect-app-eslint-codegen-model': ^0.11.0
   '@daotl/rome-config': 0.0.1-alpha.4
   '@effect-app/cli': ^0.9.0
   '@effect-app/compiler': ^0.19.0
@@ -54,7 +53,6 @@ specifiers:
   enhanced-resolve: ^5.12.0
   eslint: ^8.37.0
   eslint-plugin-codegen: ^0.17.0
-  eslint-plugin-simple-import-sort: ^10.0.0
   eslint-watch: ^8.0.0
   madge: ^6.0.0
   nodemon: ^2.0.22
@@ -83,7 +81,6 @@ dependencies:
 
 devDependencies:
   '@babel/cli': 7.21.0
-  '@daotl/effect-app-eslint-codegen-model': 0.11.0
   '@daotl/rome-config': 0.0.1-alpha.4_rome@12.0.0
   '@effect-app/cli': 0.9.0
   '@effect-app/compiler': 0.19.0_@types+node@18.11.19
@@ -101,7 +98,6 @@ devDependencies:
   enhanced-resolve: 5.12.0
   eslint: 8.37.0
   eslint-plugin-codegen: 0.17.0_3ogk7peuefdu45q3hbzcgdiuna
-  eslint-plugin-simple-import-sort: 10.0.0_eslint@8.37.0
   eslint-watch: 8.0.0_eslint@8.37.0
   madge: 6.0.0
   nodemon: 2.0.22
@@ -345,15 +341,6 @@ packages:
       source-map: 0.5.7
     dev: true
 
-  /@babel/generator/7.20.14:
-    resolution: {integrity: sha512-AEmuXHdcD3A52HHXxaTmYlb8q/xMEhoRP67B3T4Oq7lbmSoqroMZzjnGj3+i1io3pdnF8iBYVu4Ilj+c4hBxYg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/types': 7.21.3
-      '@jridgewell/gen-mapping': 0.3.2
-      jsesc: 2.5.2
-    dev: true
-
   /@babel/generator/7.21.3:
     resolution: {integrity: sha512-QS3iR1GYC/YGUnW7IdggFeN5c1poPUurnGttOV/bZgPGV+izC/D8HnD6DLwod0fsatNyVn1G3EVWMYIF0nHbeA==}
     engines: {node: '>=6.9.0'}
@@ -470,14 +457,6 @@ packages:
       js-tokens: 4.0.0
     dev: true
 
-  /@babel/parser/7.20.15:
-    resolution: {integrity: sha512-DI4a1oZuf8wC+oAJA9RW6ga3Zbe8RZFt7kD9i4qAspz3I/yHet1VvC3DiSy/fsUvv5pvJuNPh0LPOdCcqinDPg==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    dependencies:
-      '@babel/types': 7.21.3
-    dev: true
-
   /@babel/parser/7.21.3:
     resolution: {integrity: sha512-lobG0d7aOfQRXh8AyklEAgZGvA4FShxo6xQbUrrT/cNBPUdIDojlokwJsQyCC/eKia7ifqM0yP+2DRZ4WKw2RQ==}
     engines: {node: '>=6.0.0'}
@@ -534,22 +513,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
-    dev: true
-
-  /@daotl/effect-app-eslint-codegen-model/0.11.0:
-    resolution: {integrity: sha512-kaB7Hl7Ai9eCjWp2GlxY0PYySafEmcno7NZJQocdeOl2W/NfyYE6L/KqPzspCgKG20QpEr7l81TvNgVW0TURDA==}
-    dependencies:
-      '@babel/generator': 7.20.14
-      '@babel/parser': 7.20.15
-      eslint-plugin-codegen: 0.17.0_3ogk7peuefdu45q3hbzcgdiuna
-      glob: 8.1.0
-      io-ts: 2.2.20
-      io-ts-extra: 0.11.6
-      js-yaml: 4.1.0
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - fp-ts
-      - supports-color
     dev: true
 
   /@daotl/rome-config/0.0.1-alpha.4_rome@12.0.0:
@@ -2821,14 +2784,6 @@ packages:
     dev: true
     patched: true
 
-  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.37.0:
-    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.37.0
-    dev: true
-
   /eslint-scope/5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
@@ -3655,12 +3610,6 @@ packages:
     dependencies:
       fp-ts: 2.13.1
       io-ts: 2.2.20_fp-ts@2.13.1
-    dev: true
-
-  /io-ts/2.2.20:
-    resolution: {integrity: sha512-Rq2BsYmtwS5vVttie4rqrOCIfHCS9TgpRLFpKQCM1wZBBRY9nWVGmEvm2FnDbSE2un1UE39DvFpTR5UL47YDcA==}
-    peerDependencies:
-      fp-ts: ^2.5.0
     dev: true
 
   /io-ts/2.2.20_fp-ts@2.13.1:
