@@ -1,5 +1,5 @@
 {
-  "name": "@daotl/nodejs-effect-starter",
+  "name": "@nodejs-effect-starter/root",
   "version": "0.0.1",
   "description": "Node.js + Effect starter template for DAOT projects",
   "private": true,
@@ -76,13 +76,13 @@
     "http-proxy": "npm:http-proxy-node16@1.0.0"
   },
   "dependencies": {
-    "@effect-app/infra": "^0.44.5",
-    "@effect-app/prelude": "^0.33.4",
     "@effect-app/core": "^0.38.1",
+    "@effect-app/infra": "^0.44.5",
     "@effect-app/infra-adapters": "^0.32.4",
+    "@effect-app/prelude": "^0.33.4",
     "@effect-app/schema": "^0.30.2",
-    "@effect/io": "^0.15.2",
     "@effect/data": "^0.7.4",
+    "@effect/io": "^0.15.2",
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {
@@ -90,9 +90,9 @@
     "@daotl/effect-app-eslint-codegen-model": "^0.11.0",
     "@daotl/rome-config": "0.0.1-alpha.4",
     "@effect-app/cli": "^0.9.0",
-    "@effect-app/prelude": "^0.33.4",
-    "@effect-app/core": "^0.38.1",
     "@effect-app/compiler": "^0.19.0",
+    "@effect-app/core": "^0.38.1",
+    "@effect-app/prelude": "^0.33.4",
     "@effect/language-service": "^0.0.19",
     "@tsconfig/node18-strictest-esm": "^1.0.1",
     "@tsplus/installer": "0.0.171",

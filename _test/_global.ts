@@ -1,1 +1,1 @@
-import '@daotl/nodejs-effect-starter/_global'
+import '@nodejs-effect-starter/root/_global'

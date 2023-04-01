@@ -1,7 +1,8 @@
 {
   "importMap": {
-    "^(.*)/_src/(.*)\\.[cm]?[tj]s$": "@daotl/effet-starter/$2",
-    "^(.*)/node_modules/@daotl/nodejs-effect-starter/(.*)/_src/(.*)\\.[cm]?[tj]s$": "@daotl/nodejs-effect-starter/$2/$3",
+    "^(.*)/_lib/(.+)/_src/(.+)\\.[cm]?[tj]s$": "@nodejs-effect-starter/$2/$3",
+    "^(.*)/_src/(.+)\\.[cm]?[tj]s$": "@nodejs-effect-starter/main/$2",
+    "^(.*)/node_modules/@nodejs-effect-starter/(.+)/_src/(.+)\\.[cm]?[tj]s$": "@nodejs-effect-starter/$2/$3",
     ".pnpm/[^\/]*/node_modules/(.*)": "$1"
   }
 }
