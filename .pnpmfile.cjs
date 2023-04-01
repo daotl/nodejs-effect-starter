@@ -47,9 +47,6 @@ function afterAllResolved(lockfile, context) {
 
 module.exports = {
   hooks: {
-    // Temporary disabled for causing errors for unknown reason:
-    //   ERROR  @effect-app/prelude found 2 times
-    //   @effect-app/infra-adapters found 2 times
-    // afterAllResolved,
+    afterAllResolved,
   },
 }

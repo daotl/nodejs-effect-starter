@@ -45,8 +45,8 @@ importers:
       '@effect-app/cli': ^0.9.0
       '@effect-app/compiler': ^0.19.0
       '@effect-app/core': ^0.38.1
-      '@effect-app/eslint-codegen-model': ^0.16.0
-      '@effect-app/prelude': ^0.29.1
+      '@effect-app/eslint-codegen-model': ^0.17.0
+      '@effect-app/prelude': ^0.33.4
       '@effect/language-service': ^0.0.19
       '@tsconfig/strictest': ^2.0.0
       '@tsplus/installer': 0.0.171
@@ -97,8 +97,8 @@ importers:
       '@effect-app/cli': 0.9.0
       '@effect-app/compiler': 0.19.0_@types+node@18.11.11
       '@effect-app/core': 0.38.1
-      '@effect-app/eslint-codegen-model': 0.16.0
-      '@effect-app/prelude': 0.29.2
+      '@effect-app/eslint-codegen-model': 0.17.0
+      '@effect-app/prelude': 0.33.4
       '@effect/language-service': 0.0.19_izp2ue34jjv4swyrhg2ux4ha3e
       '@tsconfig/strictest': 2.0.0
       '@tsplus/installer': 0.0.171_hpdvurkkfx7ieli77n5yutmms4
@@ -888,15 +888,6 @@ packages:
       jsesc: 2.5.2
     dev: true
 
-  /@babel/generator/7.21.1:
-    resolution: {integrity: sha512-1lT45bAYlQhFn/BHivJs43AiW2rg3/UbLyShGfF3C0KmHvO5fSghWd5kBJy30kpRRucGzXStvnnCFniCR2kXAA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/types': 7.21.2
-      '@jridgewell/gen-mapping': 0.3.2
-      '@jridgewell/trace-mapping': 0.3.17
-      jsesc: 2.5.2
-
   /@babel/generator/7.21.3:
     resolution: {integrity: sha512-QS3iR1GYC/YGUnW7IdggFeN5c1poPUurnGttOV/bZgPGV+izC/D8HnD6DLwod0fsatNyVn1G3EVWMYIF0nHbeA==}
     engines: {node: '>=6.9.0'}
@@ -917,7 +908,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-explode-assignable-expression': 7.18.6
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
     dev: true
 
   /@babel/helper-compilation-targets/7.20.0_@babel+core@7.21.3:
@@ -1035,7 +1026,7 @@ packages:
     resolution: {integrity: sha512-eyAYAsQmB80jNfg4baAtLeWAQHfHFiR483rzFK+BhETlGZaQC9bsfrugfXDCbRHLQbIA7U5NxhhOxN7p/dWIcg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
     dev: true
 
   /@babel/helper-function-name/7.19.0:
@@ -1057,7 +1048,7 @@ packages:
     resolution: {integrity: sha512-UlJQPkFqFULIcyW5sbzgbkxn2FKRgwWiRexcuaR8RNJRy8+LLveqPjwZV/bwrLZCN0eUHD/x8D0heK1ozuoo6Q==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
 
   /@babel/helper-member-expression-to-functions/7.18.9:
     resolution: {integrity: sha512-RxifAh2ZoVU67PyKIO4AMi1wTenGfMR/O/ae0CCRqwgBAt5v7xjdtRw7UoSbsreKrQn5t7r89eruK/9JjYHuDg==}
@@ -1095,7 +1086,7 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       '@babel/template': 7.20.7
       '@babel/traverse': 7.21.2
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1135,7 +1126,7 @@ packages:
       '@babel/helper-annotate-as-pure': 7.18.6
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-wrap-function': 7.19.0
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1208,7 +1199,7 @@ packages:
       '@babel/helper-function-name': 7.21.0
       '@babel/template': 7.20.7
       '@babel/traverse': 7.21.2
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1262,13 +1253,6 @@ packages:
     dependencies:
       '@babel/types': 7.21.3
     dev: true
-
-  /@babel/parser/7.21.2:
-    resolution: {integrity: sha512-URpaIJQwEkEC2T9Kn+Ai6Xe/02iNaVCuT/PtoRz3GPVJVDpPd7mLo+VddTbhCRU9TXqW5mSrQfXZyi8kDKOVpQ==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    dependencies:
-      '@babel/types': 7.21.2
 
   /@babel/parser/7.21.3:
     resolution: {integrity: sha512-lobG0d7aOfQRXh8AyklEAgZGvA4FShxo6xQbUrrT/cNBPUdIDojlokwJsQyCC/eKia7ifqM0yP+2DRZ4WKw2RQ==}
@@ -2191,7 +2175,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@babel/types': 7.21.2
 
   /@babel/traverse/7.20.12:
@@ -2217,12 +2201,12 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.21.1
+      '@babel/generator': 7.21.3
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.21.0
       '@babel/helper-hoist-variables': 7.18.6
       '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@babel/types': 7.21.2
       debug: 4.3.4
       globals: 11.12.0
@@ -2234,12 +2218,12 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.21.1
+      '@babel/generator': 7.21.3
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.21.0
       '@babel/helper-hoist-variables': 7.18.6
       '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@babel/types': 7.21.2
       debug: 4.3.4
       globals: 11.12.0
@@ -2410,23 +2394,6 @@ packages:
       - terser
     dev: true
 
-  /@effect-app/core/0.36.1:
-    resolution: {integrity: sha512-QxU0UGjSUOF20VoZkiUcZro++awydVmWeqCBYmCS6SEtB4DkeJTaQ3Bd3ije8Du8vsui+1tI/TceCQlNPelFTw==}
-    dependencies:
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
-      '@effect/stream': 0.12.1
-      '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
-      cross-fetch: 3.1.5
-      lodash: 4.17.21
-      path-parser: 6.1.0
-      query-string: 8.1.0
-      uuid: 9.0.0
-      validator: 13.9.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
-
   /@effect-app/core/0.38.1:
     resolution: {integrity: sha512-spCIwIzADQDdPXW6jbH5sQb/HiQPhQBWT35R9sJDV/vVraFM2GoYhnU45yFZaYZkVTQXcv5qNoqNJKE7GOjZmg==}
     dependencies:
@@ -2443,8 +2410,8 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@effect-app/eslint-codegen-model/0.16.0:
-    resolution: {integrity: sha512-ZH1u14KTHofTjCUroT/rIYxKxm1GN1J2MIofoxeN3Nyuc8scrzwqKvSNo7ttWfCeM9f2XU3svjXbqbNtZngpXQ==}
+  /@effect-app/eslint-codegen-model/0.17.0:
+    resolution: {integrity: sha512-cJtxOkOHi84AW7UrO7YTwQ0l5jIdkZh0CGsUB3/6JLPWi7SJ5V2sZ1k5rlro4qKuczM3/gNJhDMcUSe7YIJwlA==}
     dependencies:
       '@babel/generator': 7.21.3
       '@babel/parser': 7.21.3
@@ -2501,26 +2468,6 @@ packages:
       - supports-color
     dev: false
 
-  /@effect-app/prelude/0.29.2:
-    resolution: {integrity: sha512-MiLikoHa4WuQn4XWgL2CM6JbfeIm15BZva0Gnm5UBrpsp0ZbjzrndmUpXG/FbBrHUdFrSF4n2rTJt1cptmSqsg==}
-    dependencies:
-      '@effect-app/core': 0.36.1
-      '@effect-app/schema': 0.27.1
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
-      '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
-      date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
-      lodash: 4.17.21
-      nanoid: 4.0.1
-      path-parser: 6.1.0
-      query-string: 8.1.0
-      ts-pattern: 4.2.2
-      uuid: 9.0.0
-      validator: 13.9.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
-
   /@effect-app/prelude/0.33.4:
     resolution: {integrity: sha512-nHiA18q0BuTqKKVWAr9vpCqsNF6qkdZwj8tFbNmZ4upFdG3dt/3wdrKv77q6xonMHWog+Dp8Jrar3pXN4XjjFg==}
     dependencies:
@@ -2539,23 +2486,6 @@ packages:
       validator: 13.9.0
     transitivePeerDependencies:
       - encoding
-    dev: false
-
-  /@effect-app/schema/0.27.1:
-    resolution: {integrity: sha512-dhfO22xpqLkmt5pnLWwsUZv2lUO/77S7VMGP8BxPrI+H+N2toYxPuILCbS0b8lHlUSPydxYZ4wDIJog+Z/opuw==}
-    dependencies:
-      '@effect-app/core': 0.36.1
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
-      '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
-      cross-fetch: 3.1.5
-      lodash: 4.17.21
-      path-parser: 6.1.0
-      uuid: 9.0.0
-      validator: 13.9.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
 
   /@effect-app/schema/0.30.2:
     resolution: {integrity: sha512-I/yiwliJQHLP4FmDeMPMKvmOitqH70QZqTSE/J5QB8MW4zIjA8XsS9tm+AFC6O/U5bN22iuxT9fgEKj7X0j/Gg==}
@@ -2571,7 +2501,6 @@ packages:
       validator: 13.9.0
     transitivePeerDependencies:
       - encoding
-    dev: false
 
   /@effect-app/vue/0.31.6:
     resolution: {integrity: sha512-RPGGbACMVrF9aZYn+uePr8l8tko+L2EHo/0YFclezRYAZFetSx/8fiGpPiYGBOOfZ0FlsJdbhaqhsyg8av4pWw==}
@@ -2604,13 +2533,6 @@ packages:
       '@fp-ts/data': 0.0.40
     dev: true
     patched: true
-
-  /@effect/stream/0.12.1:
-    resolution: {integrity: sha512-Y5CkZXv1M6EAbuqa1tQxL6qeeDlxRchUZq+XHc7kb/sko9Za+G/WyRqoEWm0VmIcyWh6RCzpEsN6m3izXqIT0w==}
-    dependencies:
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
-    dev: true
 
   /@effect/stream/0.14.0:
     resolution: {integrity: sha512-wr6HhIN1q3L8QEj/+5ocVGoS615vzmGIQRPCI05mW6OOYNv9ORyF/NyM91NZ67C07KixC1SnP6M8HXCBBJ0QJw==}
@@ -4706,7 +4628,7 @@ packages:
   /@vue/compiler-core/3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
     dependencies:
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@vue/shared': 3.2.47
       estree-walker: 2.0.2
       source-map: 0.6.1
@@ -4720,7 +4642,7 @@ packages:
   /@vue/compiler-sfc/3.2.47:
     resolution: {integrity: sha512-rog05W+2IFfxjMcFw10tM9+f7i/+FFpZJJ5XHX72NP9eC2uRD+42M3pYcQqDXVYoj74kHMSEdQ/WmCjt8JFksQ==}
     dependencies:
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@vue/compiler-core': 3.2.47
       '@vue/compiler-dom': 3.2.47
       '@vue/compiler-ssr': 3.2.47
@@ -4764,7 +4686,7 @@ packages:
   /@vue/reactivity-transform/3.2.47:
     resolution: {integrity: sha512-m8lGXw8rdnPVVIdIFhf0LeQ/ixyHkH5plYuS83yop5n7ggVJU+z5v0zecwEnX7fa7HNLBhh2qngJJkxpwEEmYA==}
     dependencies:
-      '@babel/parser': 7.21.2
+      '@babel/parser': 7.21.3
       '@vue/compiler-core': 3.2.47
       '@vue/shared': 3.2.47
       estree-walker: 2.0.2
@@ -10483,12 +10405,6 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-
-  /nanoid/4.0.1:
-    resolution: {integrity: sha512-udKGtCCUafD3nQtJg9wBhRP3KMbPglUsgV5JVsXhvyBs/oefqb4sqMEhKBBgqZncYowu58p1prsZQBYvAj/Gww==}
-    engines: {node: ^14 || ^16 || >=18}
-    hasBin: true
-    dev: true
 
   /nanoid/4.0.2:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
