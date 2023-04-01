@@ -18,12 +18,12 @@
     "clean": "rm -rf ./.nuxt ./node_modules/.vite"
   },
   "dependencies": {
-    "@effect-app/prelude": "^0.29.1",
-    "@effect-app/vue": "^0.27.1",
-    "@effect-app/core": "^0.36.0",
-    "@effect-app/schema": "^0.27.0",
-    "@effect/io": "^0.12.0",
-    "@effect/data": "^0.5.1",
+    "@effect-app/prelude": "^0.33.4",
+    "@effect-app/vue": "^0.31.6",
+    "@effect-app/core": "^0.38.1",
+    "@effect-app/schema": "^0.30.2",
+    "@effect/io": "^0.15.2",
+    "@effect/data": "^0.7.4",
     "@effect-app-boilerplate/resources": "*",
     "@effect-app-boilerplate/models": "*",
     "@vueuse/core": "^9.13.0",
@@ -32,21 +32,20 @@
     "date-fns": "^2.29.3",
     "http-proxy": "npm:http-proxy-node16@^1.0.0",
     "mitt": "^3.0.0",
-    "papaparse": "^5.4.1",
     "reconnecting-eventsource": "^1.6.2",
     "vue-timeago3": "^2.3.0",
     "vue-toastification": "^2.0.0-rc.5",
-    "vuetify": "^3.1.11",
-    "xlsx": "^0.18.5"
+    "vuetify": "^3.1.12"
   },
   "devDependencies": {
     "@mdi/js": "^7.2.96",
     "@types/cookie": "^0.5.1",
     "@types/http-proxy": "^1.17.10",
     "eslint-plugin-vue": "^9.10.0",
-    "h3": "^1.6.2",
+    "h3": "^1.6.4",
     "nuxt": "3.3.2",
     "sass": "^1.60.0",
+    "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz",
     "vue-tsc": "^1.2.0"
   },
   "resolutions": {
