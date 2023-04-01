@@ -18,11 +18,11 @@ const enforceSingleVersion = [
 ]
 
 function afterAllResolved(lockfile, context) {
-  context.log(`Checking duplicate packages`)
+  context.log('Checking duplicate packages')
   const packagesKeys = Object.keys(lockfile.packages)
   const found = {}
-  for (let p of packagesKeys) {
-    for (let x of enforceSingleVersion) {
+  for (const p of packagesKeys) {
+    for (const x of enforceSingleVersion) {
       if (p.startsWith(`/${x}/`)) {
         if (found[x]) {
           found[x] += 1
@@ -33,7 +33,7 @@ function afterAllResolved(lockfile, context) {
     }
   }
   let msg = ''
-  for (let p in found) {
+  for (const p in found) {
     const count = found[p]
     if (count > 1) {
       msg += `${p} found ${count} times\n`

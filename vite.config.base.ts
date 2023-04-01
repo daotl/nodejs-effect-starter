@@ -17,12 +17,12 @@ export default function makeConfig(
       exclude: ['./_test/**/*'],
       reporters: 'verbose',
       globals: true,
-      deps: useDist ? { inline: [new RegExp(dirName + '/dist')] } : undefined,
+      deps: useDist ? { inline: [new RegExp(`${dirName}/dist`)] } : undefined,
     },
     resolve: dirName
       ? {
           alias: {
-            [JSON.parse(fs.readFileSync(dirName + '/package.json', 'utf-8'))
+            [JSON.parse(fs.readFileSync(`${dirName}/package.json`, 'utf-8'))
               .name]: path.resolve(dirName, useDist ? '/dist' : '/_src'),
           },
         }

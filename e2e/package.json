@@ -9,8 +9,6 @@
     "test": "playwright test -c test-out",
     "test:watch": "playwright-watch test",
     "build": "tsc --build",
-    "lint": "rome format . && rome check .",
-    "lint:fix": "rome format --write . && rome check --apply .",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint .",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
     "autofix": "pnpm lint --fix",
