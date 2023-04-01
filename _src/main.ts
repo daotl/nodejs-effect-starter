@@ -1,6 +1,6 @@
 import { CauseException } from '@effect-app/infra/errors'
 
-import { runtimeDebug } from '@effect/io/Debug'
+import { runtimeDebug } from '@effect/data/Debug'
 
 runtimeDebug.traceStackLimit = 50
 if (process.argv.includes('--debug')) {
