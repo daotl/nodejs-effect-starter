@@ -1,2 +1,1 @@
-import '@effect-app/infra/_global'
-import '@effect-app/prelude/_global'
+import '@daotl-effect/prelude/_global'

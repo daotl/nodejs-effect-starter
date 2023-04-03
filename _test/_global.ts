@@ -1,1 +1,1 @@
-import '@nodejs-effect-starter/root/_global'
+import '@nodejs-effect-starter/main/_global'

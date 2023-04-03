@@ -1,9 +1,11 @@
 import { CauseException } from '@effect-app/infra/errors'
-
 import { runtimeDebug } from '@effect/data/Debug'
 
+import { BaseConfig } from './config.js'
+
 runtimeDebug.traceStackLimit = 50
-if (process.argv.includes('--debug')) {
+const appConfig = BaseConfig.config.runSync$
+if (process.argv.includes('--debug') || appConfig.env === 'local-dev') {
   runtimeDebug.minumumLogLevel = 'Debug'
   runtimeDebug.tracingEnabled = true
   runtimeDebug.traceStackLimit = 100
@@ -29,4 +31,4 @@ const reportAppError = <E>(cause: Cause<E>) => {
   return Effect.unit
 }
 
-program.tapErrorCause(reportAppError).runMain()
+program.tapErrorCause(reportAppError).runMain$()
