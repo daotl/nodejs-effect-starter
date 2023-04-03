@@ -2,14 +2,42 @@
   "$schema": "./node_modules/rome/configuration_schema.json",
   "files": {
     "ignore": [
+      "**/generated",
       "**/*.json",
       "**/dist"
     ]
   },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "recommended": true
+      },
+      "complexity": {
+        "recommended": true,
+        "noUselessFragments": "error"
+      },
+      "correctness": {
+        "recommended": true,
+        "noUndeclaredVariables": "off",
+        "noUnusedVariables": "error"
+      },
+      "performance": {
+        "recommended": true
+      },
+      "security": {
+        "recommended": true
+      },
+      "style": {
+        "recommended": true,
+        "noShoutyConstants": "error",
+        "useBlockStatements": "error",
+        "useFragmentSyntax": "error",
+        "useShorthandArrayType": "error"
+      },
+      "suspicious": {
+        "recommended": true
+      }
     }
   },
   "formatter": {
