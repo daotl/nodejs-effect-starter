@@ -88,7 +88,7 @@
 		{
 			"label": "Watch Frontend",
 			"type": "shell",
-			"command": "pnpm compile -w",
+			"command": "pnpm watch",
 			"options": {
 				"cwd": "${workspaceRoot}/_project/frontend-nuxt"
 			},
@@ -145,7 +145,7 @@
 		{
 			"label": "Run UI",
 			"type": "shell",
-			"command": "pnpm dev -o",
+			"command": "pnpm dev",
 			"options": {
 				"cwd": "${workspaceRoot}/_project/frontend-nuxt"
 			},
