@@ -28,7 +28,7 @@
     "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
     "lint": "rome format . && rome check .",
     "lint:fix": "rome format --write . && rome check --apply .",
-    "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint _src/** _test/**",
+    "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint _src/** _test/**/*.ts",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx _src/** _test/**",
     "test": "vitest",
     "test:run": "pnpm run test run",
