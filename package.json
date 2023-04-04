@@ -25,7 +25,6 @@
     "rebuild": "pnpm clean && pnpm build",
     "build:watch": "pnpm build --watch",
     "build:watch2": "pnpm clean:dist && NODE_OPTIONS=--max-old-space-size=6144 tsc -w",
-    "build:libs": "cd libs && pnpm build && cd ../.. && pnpm build",
     "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
     "lint": "rome format . && rome check .",
     "lint:fix": "rome format --write . && rome check --apply .",
