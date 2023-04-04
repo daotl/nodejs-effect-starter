@@ -35,7 +35,7 @@ patchedDependencies:
 
 specifiers:
   '@babel/cli': ^7.21.0
-  '@daotl-effect/prelude': ^0.0.5
+  '@daotl-effect/prelude': ^0.0.6
   '@daotl/rome-config': 0.0.1-alpha.4
   '@effect-app/cli': ^0.9.0
   '@effect-app/compiler': ^0.19.0
@@ -77,7 +77,7 @@ specifiers:
   vitest: ^0.29.7
 
 dependencies:
-  '@daotl-effect/prelude': 0.0.5
+  '@daotl-effect/prelude': 0.0.6
   '@effect-app/core': 0.39.1
   '@effect-app/infra': 0.45.1
   '@effect-app/infra-adapters': 0.33.1
@@ -523,8 +523,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@daotl-effect/prelude/0.0.5:
-    resolution: {integrity: sha512-k7hIz0pQT1xbSBpnpIHt8CBFMTfhkLvkz1KfqJe/EBmmfbGh8qrWsoxAvS3ftvQo8UB3w9dKqrTDnMyYGGKWjA==}
+  /@daotl-effect/prelude/0.0.6:
+    resolution: {integrity: sha512-ZgLM2dzHbOj1rYHkztgJDw4yP1aheZxGpLL63FZHNDGAAiBW0r4JVNhrOZBNLJmdD67T3dOGcwx9xUDyVcHygw==}
     dependencies:
       '@effect-app/core': 0.39.1
       '@effect-app/infra-adapters': 0.33.1
@@ -541,6 +541,7 @@ packages:
       query-string: 8.1.0
       remeda: 1.12.0
       ts-pattern: 4.2.2
+      type-fest: 3.7.2
       typed-case: 1.0.2
       uuid: 9.0.0
       validator: 13.9.0
