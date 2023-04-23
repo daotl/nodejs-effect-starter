@@ -8,8 +8,8 @@ export class GetHelloWorldRequest extends Get(
 )<GetHelloWorldRequest>()({}) {}
 
 export class GetHelloWorldResponse extends Model<GetHelloWorldResponse>()({
-  now: prop(date),
-  context: prop(unknown),
-  currentUser: prop(nullable(User)),
-  randomUser: prop(User),
+  now: date,
+  context: unknown,
+  currentUser: User.nullable,
+  randomUser: User,
 }) {}

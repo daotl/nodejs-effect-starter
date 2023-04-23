@@ -5,7 +5,7 @@ import { Operation, OperationId } from '../Views.js'
 export class FindOperationRequest extends Get(
   '/operations/:id',
 )<FindOperationRequest>()({
-  id: prop(OperationId),
+  id: OperationId,
 }) {}
 
 export const FindOperationResponse = nullable(Operation)

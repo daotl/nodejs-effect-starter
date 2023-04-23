@@ -9,9 +9,36 @@
     ]
   },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "recommended": true
+      },
+      "complexity": {
+        "recommended": true,
+        "noUselessFragments": "error"
+      },
+      "correctness": {
+        "recommended": true,
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error"
+      },
+      "performance": {
+        "recommended": true
+      },
+      "security": {
+        "recommended": true
+      },
+      "style": {
+        "recommended": true,
+        "noShoutyConstants": "error",
+        "useBlockStatements": "error",
+        "useFragmentSyntax": "error",
+        "useShorthandArrayType": "error"
+      },
+      "suspicious": {
+        "recommended": true
+      }
     }
   },
   "formatter": {

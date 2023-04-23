@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { BasicRequestEnv } from "@effect-app-boilerplate/messages/RequestLayers"
-import type { Request } from "@effect-app/infra/api/express/schema/requestHandler"
-import { NotLoggedInError } from "@effect-app/infra/errors"
-import { RequestContextContainer } from "@effect-app/infra/services/RequestContextContainer"
-import type { ReqRes, ReqResSchemed } from "@effect-app/prelude/schema"
-import type express from "express"
-import { CurrentUser, UserRepo } from "../../services.js"
-import { UserProfile } from "../../services/UserProfile.js"
-import type { CTX } from "./ctx.js"
+import { BasicRequestEnv } from '@effect-app-boilerplate/messages/RequestLayers'
+import type { Request } from '@effect-app/infra/api/express/schema/requestHandler'
+import { NotLoggedInError } from '@effect-app/infra/errors'
+import { RequestContextContainer } from '@effect-app/infra/services/RequestContextContainer'
+import type { ReqRes, ReqResSchemed } from '@effect-app/prelude/schema'
+import type express from 'express'
+import { CurrentUser, UserRepo } from '../../services.js'
+import { UserProfile } from '../../services/UserProfile.js'
+import type { CTX } from './ctx.js'
 
 // const manager = ReasonableString("manager")
 
@@ -16,7 +16,7 @@ export function RequestEnv(handler: { Request: any }) {
   return (_req: express.Request, _res: express.Response) => {
     const allowAnonymous = !!handler.Request.allowAnonymous
     // const allowedRoles: readonly Role[] = handler.Request.allowedRoles ?? ["manager"]
-    return Effect.gen(function*($) {
+    return Effect.gen(function* ($) {
       const requestContext = yield* $(RequestContextContainer.get)
 
       const userProfile = requestContext.user
@@ -38,8 +38,10 @@ export function RequestEnv(handler: { Request: any }) {
       return ctx.add(
         UserProfile,
         UserProfile.make({
-          get: Effect(userProfile).flatMap(_ => _.encaseInEffect(() => new NotLoggedInError()))
-        })
+          get: Effect(userProfile).flatMap((_) =>
+            _.encaseInEffect(() => new NotLoggedInError()),
+          ),
+        }),
       )
     })
   }
@@ -49,11 +51,14 @@ export function RequestEnv(handler: { Request: any }) {
  * @tsplus static CurrentUser fromUserProfile
  */
 export function fromUserProfile() {
-  return UserRepo.flatMap(_ => _.getCurrentUser)
-    .map(_ => CurrentUser.make({ get: Effect(_) }))
+  return UserRepo.flatMap((_) => _.getCurrentUser).map((_) =>
+    CurrentUser.make({ get: Effect(_) }),
+  )
 }
 
-export type RequestEnv = ContextA<Effect.Success<ReturnType<ReturnType<typeof RequestEnv>>>>
+export type RequestEnv = ContextA<
+  Effect.Success<ReturnType<ReturnType<typeof RequestEnv>>>
+>
 
 export function handleRequestEnv<
   R,
@@ -64,24 +69,40 @@ export function handleRequestEnv<
   HeaderA,
   ReqA extends PathA & QueryA & BodyA,
   ResA,
-  ResE
+  ResE,
 >(
-  handler: RequestHandler<R, PathA, CookieA, QueryA, BodyA, HeaderA, ReqA, ResA, ResE>
+  handler: RequestHandler<
+    R,
+    PathA,
+    CookieA,
+    QueryA,
+    BodyA,
+    HeaderA,
+    ReqA,
+    ResA,
+    ResE
+  >,
 ) {
   return {
     handler: {
       ...handler,
       h: (pars: any) =>
-        Debug.untraced(restore =>
+        Debug.untraced((restore) =>
           Effect.all({
             context: RequestContextContainer.get,
             // TODO: user should only be fetched and type wise available when not allow anonymous
-            user: UserProfile.flatMap(_ => _.get.catchAll(() => Effect(undefined)))
-          })
-            .flatMap(ctx => restore(handler.h as (i: any, ctx: any) => Effect<R, ResE, ResA>)(pars, ctx))
-        )
+            user: UserProfile.flatMap((_) =>
+              _.get.catchAll(() => Effect(undefined)),
+            ),
+          }).flatMap((ctx) =>
+            restore(handler.h as (i: any, ctx: any) => Effect<R, ResE, ResA>)(
+              pars,
+              ctx,
+            ),
+          ),
+        ),
     },
-    makeContext: RequestEnv(handler)
+    makeContext: RequestEnv(handler),
   }
 }
 type ContextA<X> = X extends Context<infer A> ? A : never
@@ -95,7 +116,7 @@ export interface RequestHandler<
   HeaderA,
   ReqA extends PathA & QueryA & BodyA,
   ResA,
-  ResE
+  ResE,
 > {
   adaptResponse?: any
   h: (i: PathA & QueryA & BodyA & {}, ctx: CTX) => Effect<R, ResE, ResA>

@@ -1,6 +1,11 @@
 {
   "reject": [
-    "jwks-rsa", "applicationinsights", "faker", "@types/faker", "redis",
-    "@types/redis"
+    "jwks-rsa",
+    "applicationinsights",
+    "faker",
+    "@types/faker",
+    "redis",
+    "@types/redis",
+    "vue-tsc"
   ]
 }

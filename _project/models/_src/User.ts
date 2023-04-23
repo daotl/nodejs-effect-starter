@@ -33,19 +33,17 @@ export class FullName extends MNModel<
   FullName.Encoded,
   FullName.Props
 >()({
-  firstName: prop(FirstName),
-  lastName: prop(LastName),
+  firstName: FirstName,
+  lastName: LastName,
 }) {
   static render(this: void, fn: FullName) {
     return LongString(`${fn.firstName} ${fn.lastName}`)
   }
 
-  static create(this: void, firstName: FirstName, lastName: LastName) {
+  static make(this: void, firstName: FirstName, lastName: LastName) {
     return new FullName({ firstName, lastName })
   }
 }
-/** @ignore @internal @deprecated */
-export type FullNameConstructor = typeof FullName
 
 /**
  * @tsplus getter FullName show
@@ -78,9 +76,9 @@ export class User extends MNModel<
   User.Encoded,
   User.Props
 >()({
-  id: defaultProp(UserId, UserId.make),
-  displayName: prop(DisplayName),
-  role: prop(Role),
+  id: UserId.withDefault,
+  displayName: DisplayName,
+  role: Role,
 }) {}
 
 /**
@@ -117,9 +115,6 @@ export const defaultEqual = Equivalence.string.contramap((u: User) => u.id)
 //     ["|>"](arbitrary(_ => (userPool ? _.constantFrom(...userPool) : userArb(_))))
 //     ["|>"](withDefaults)
 
-/** @ignore @internal @deprecated */
-export type UserConstructor = typeof User
-
 // codegen:start {preset: model}
 //
 /* eslint-disable */
@@ -129,9 +124,8 @@ export namespace FullName {
    * @tsplus companion FullName.Encoded/Ops
    */
   export class Encoded extends EncodedClass<typeof FullName>() {}
-  export interface ConstructorInput
-    extends ConstructorInputFromApi<typeof FullName> {}
-  export interface Props extends GetProvidedProps<typeof FullName> {}
+  export type ConstructorInput = ConstructorInputFromApi<typeof FullName>
+  export type Props = GetProvidedProps<typeof FullName>
 }
 export namespace User {
   /**
@@ -139,12 +133,10 @@ export namespace User {
    * @tsplus companion User.Encoded/Ops
    */
   export class Encoded extends EncodedClass<typeof User>() {}
-  export interface ConstructorInput
-    extends ConstructorInputFromApi<typeof User> {}
-  export interface Props extends GetProvidedProps<typeof User> {}
+  export type ConstructorInput = ConstructorInputFromApi<typeof User>
+  export type Props = GetProvidedProps<typeof User>
 }
 /* eslint-enable */
 //
 // codegen:end
 //
-/* eslint-disable */

@@ -1,20 +1,20 @@
+import type {} from '@effect-app/prelude/_global'
+
+@useClassFeaturesForSchema
 export class BogusEvent extends MNModel<
   BogusEvent,
   BogusEvent.ConstructorInput,
   BogusEvent.Encoded,
   BogusEvent.Props
 >()({
-  _tag: prop(literal('BogusEvent')),
-  id: defaultProp(StringId, StringId.make),
-  at: defaultProp(date),
+  _tag: literal('BogusEvent'),
+  id: StringId.withDefault,
+  at: date.withDefault,
 }) {}
-/** @ignore @internal @deprecated */
-export type BogusEventConstructor = typeof BogusEvent
 
 export const ClientEvents = smartClassUnion({ BogusEvent })
 export type ClientEvents = ParsedShapeOfCustom<typeof ClientEvents>
 
-// rome-ignore format: generated code
 // codegen:start {preset: model}
 //
 /* eslint-disable */
@@ -24,12 +24,10 @@ export namespace BogusEvent {
    * @tsplus companion BogusEvent.Encoded/Ops
    */
   export class Encoded extends EncodedClass<typeof BogusEvent>() {}
-  export interface ConstructorInput
-    extends ConstructorInputFromApi<typeof BogusEvent> {}
-  export interface Props extends GetProvidedProps<typeof BogusEvent> {}
+  export type ConstructorInput = ConstructorInputFromApi<typeof BogusEvent>
+  export type Props = GetProvidedProps<typeof BogusEvent>
 }
 /* eslint-enable */
 //
 // codegen:end
 //
-/* eslint-disable */
