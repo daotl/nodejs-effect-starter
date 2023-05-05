@@ -8,7 +8,7 @@ import {
   respondSuccess,
 } from '@effect-app/infra/api/routing'
 import type { ValidationError } from '@effect-app/infra/errors'
-import { RequestContext, RequestId } from '@effect-app/infra/RequestContext'
+import { RequestContext } from '@effect-app/infra/RequestContext'
 import { extractSchema, SchemaNamed } from '@effect-app/prelude/schema'
 import type express from 'express'
 
@@ -19,6 +19,7 @@ import {
   RequestContextContainerImpl,
 } from '@effect-app/infra/services/RequestContextContainer'
 import { restoreFromRequestContext } from '@effect-app/infra/services/Store/Memory'
+import { RequestId } from '@effect-app/prelude/ids'
 import type { RequestHandler } from '../routing.js'
 
 export const RequestSettings = FiberRef.unsafeMake({
@@ -226,7 +227,7 @@ export function makeRequestHandler<
                     // the first log entry should be of the request start.
                     const r2 = makeMiddlewareContext
                       ? restoreFromRequestContext.zipRight(
-                          r.setupRequestFrom
+                          r
                             // the db namespace must be restored, before calling provide here
                             .provideSomeContextEffect(
                               makeMiddlewareContext(req, res),
@@ -238,75 +239,74 @@ export function makeRequestHandler<
                     return errorHandler(req, res, r2)
                   }),
                 )
-                .tapErrorCause(
-                  (cause) =>
-                    Effect.allPar(
-                      Effect(res.status(500).send()),
-                      RequestContextContainer.get.flatMap((requestContext) =>
-                        reportRequestError(cause, {
-                          requestContext,
-                          path: req.originalUrl,
-                          method: req.method,
-                        }),
-                      ),
-                      Effect.suspend(() => {
-                        const headers = res.getHeaders()
-                        return Effect.logErrorCauseMessage(
-                          'Finished request',
-                          cause,
-                        ).apply(
-                          Effect.logAnnotates({
-                            method: req.method,
-                            path: req.originalUrl,
-                            statusCode: res.statusCode.toString(),
-
-                            reqPath: pars.path.$$.pretty,
-                            reqQuery: pars.query.$$.pretty,
-                            reqBody: pretty(pars.body),
-                            reqCookies: pretty(pars.cookies),
-                            reqHeaders: pars.headers.$$.pretty,
-
-                            resHeaders: Object.entries(headers).reduce(
-                              (prev, [key, value]) => {
-                                prev[key] =
-                                  value && typeof value === 'string'
-                                    ? snipString(value)
-                                    : value
-                                return prev
-                              },
-                              {} as Record<string, any>,
-                            ).$$.pretty,
-                          }),
-                        )
+                .tapErrorCause((cause) =>
+                  Effect.allPar(
+                    Effect(res.status(500).send()),
+                    RequestContextContainer.get.flatMap((requestContext) =>
+                      reportRequestError(cause, {
+                        requestContext,
+                        path: req.originalUrl,
+                        method: req.method,
                       }),
-                    ).tapErrorCause((cause) =>
-                      Effect(
-                        console.error(
-                          'Error occurred while reporting error',
-                          cause,
-                        ),
-                      ),
-                    ).setupRequestFrom,
-                )
-                .tap(
-                  () =>
-                    RequestSettings.get.flatMap((s) => {
+                    ),
+                    Effect.suspend(() => {
                       const headers = res.getHeaders()
-                      return Effect.logInfo('Finished request').apply(
+                      return Effect.logErrorCauseMessage(
+                        'Finished request',
+                        cause,
+                      ).apply(
                         Effect.logAnnotates({
                           method: req.method,
                           path: req.originalUrl,
                           statusCode: res.statusCode.toString(),
-                          ...(s.verbose
-                            ? {
-                                resHeaders: headers.$$.pretty,
-                              }
-                            : undefined),
+
+                          reqPath: pars.path.$$.pretty,
+                          reqQuery: pars.query.$$.pretty,
+                          reqBody: pretty(pars.body),
+                          reqCookies: pretty(pars.cookies),
+                          reqHeaders: pars.headers.$$.pretty,
+
+                          resHeaders: Object.entries(headers).reduce(
+                            (prev, [key, value]) => {
+                              prev[key] =
+                                value && typeof value === 'string'
+                                  ? snipString(value)
+                                  : value
+                              return prev
+                            },
+                            {} as Record<string, any>,
+                          ).$$.pretty,
                         }),
                       )
-                    }).setupRequestFrom,
-                ).setupRequestFrom,
+                    }),
+                  ).tapErrorCause((cause) =>
+                    Effect(
+                      console.error(
+                        'Error occurred while reporting error',
+                        cause,
+                      ),
+                    ),
+                  ),
+                )
+                .tap(() =>
+                  RequestSettings.get.flatMap((s) => {
+                    const headers = res.getHeaders()
+                    return Effect.logInfo('Finished request').apply(
+                      Effect.logAnnotates({
+                        method: req.method,
+                        path: req.originalUrl,
+                        statusCode: res.statusCode.toString(),
+                        ...(s.verbose
+                          ? {
+                              resHeaders: headers.$$.pretty,
+                            }
+                          : undefined),
+                      }),
+                    )
+                  }),
+                ),
             )
+            .logSpan('request')
             .provideService(
               RequestContextContainer,
               new RequestContextContainerImpl(requestContext),

@@ -1,25 +1,19 @@
-import type { WritableComputedRef } from 'nuxt/dist/app/compat/capi'
+import type { WritableComputedRef } from "nuxt/dist/app/compat/capi"
 
-export const useModelWrapper = useValueWrapper('modelValue')
+export const useModelWrapper = useValueWrapper("modelValue")
 
 export function useValueWrapper<Name extends string>(name: Name) {
   function use<T>(
-    props: {
-      [P in Name]: T
-    },
-    emit: { (event: `update:${Name}`, value: T): void },
+    props: { [P in Name]: T },
+    emit: { (event: `update:${Name}`, value: T): void }
   ): WritableComputedRef<T>
   function use<T>(
-    props: {
-      [P in Name]?: T
-    },
-    emit: { (event: `update:${Name}`, value: T | undefined): void },
+    props: { [P in Name]?: T },
+    emit: { (event: `update:${Name}`, value: T | undefined): void }
   ): WritableComputedRef<T | undefined>
   function use<T>(
-    props: {
-      [P in Name]?: T
-    },
-    emit: { (event: `update:${Name}`, value: T | undefined): void },
+    props: { [P in Name]?: T },
+    emit: { (event: `update:${Name}`, value: T | undefined): void }
   ) {
     return useValueWrapper_<T, Name>(props, emit, name)
   }
@@ -28,28 +22,22 @@ export function useValueWrapper<Name extends string>(name: Name) {
 }
 
 export function useValueWrapper_<T, Name extends string>(
-  props: {
-    [P in Name]: T
-  },
+  props: { [P in Name]: T },
   emit: { (event: `update:${Name}`, value: T): void },
-  name: Name,
+  name: Name
 ): WritableComputedRef<T>
 export function useValueWrapper_<T, Name extends string>(
-  props: {
-    [P in Name]?: T
-  },
+  props: { [P in Name]?: T },
   emit: { (event: `update:${Name}`, value: T | undefined): void },
-  name: Name,
+  name: Name
 ): WritableComputedRef<T | undefined>
 export function useValueWrapper_<T, Name extends string>(
-  props: {
-    [P in Name]?: T
-  },
+  props: { [P in Name]?: T },
   emit: { (event: `update:${Name}`, value: T | undefined): void },
-  name: Name,
+  name: Name
 ) {
   return computed({
     get: () => props[name],
-    set: (value) => emit(`update:${name}`, value),
+    set: value => emit(`update:${name}`, value),
   })
 }

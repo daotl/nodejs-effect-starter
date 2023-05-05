@@ -48,7 +48,7 @@ export function LiveUserRepo(seed: UserSeed) {
  * @tsplus getter UserRepo getCurrentUser
  */
 export function getCurrentUser(repo: UserRepo) {
-  return UserProfile.flatMap((_) => _.get.flatMap((_) => repo.get(_.id)))
+  return UserProfile.flatMap((_) => _.get.flatMap((_) => repo.get(_.sub)))
 }
 
 /**
@@ -57,7 +57,7 @@ export function getCurrentUser(repo: UserRepo) {
 export function update(repo: UserRepo, mod: (user: User) => User) {
   return UserProfile.flatMap((_) =>
     _.get
-      .flatMap((_) => repo.get(_.id))
+      .flatMap((_) => repo.get(_.sub))
       .map(mod)
       .flatMap(repo.save),
   )
@@ -72,7 +72,7 @@ export function userUpdateWithEffect<R, E>(
 ) {
   return UserProfile.flatMap((_) =>
     _.get
-      .flatMap((_) => repo.get(_.id))
+      .flatMap((_) => repo.get(_.sub))
       .flatMap(mod)
       .flatMap(repo.save),
   )

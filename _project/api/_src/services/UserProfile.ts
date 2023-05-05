@@ -1,33 +1,28 @@
 import { jwt } from '@effect-app/infra/api/express/schema/jwt'
 import { NotLoggedInError } from '@effect-app/infra/errors'
+import { UserProfileId } from '@effect-app/prelude/ids'
 
 export class UserProfileScheme extends Model<UserProfileScheme>()({
-  /**
-   * Mapped from "sub"
-   */
-  id: StringId.fromProp('sub'),
+  sub: UserProfileId,
 }) {}
 
-export const UserProfileId = Symbol()
+export interface UserProfileServiceId {
+  readonly _: unique symbol
+}
 
 /**
  * @tsplus type UserProfile
  * @tsplus companion UserProfile.Ops
  */
-export abstract class UserProfile extends ServiceTaggedClass<UserProfile>()(
-  UserProfileId,
-) {
+export abstract class UserProfile extends TagClass<
+  UserProfileServiceId,
+  UserProfile
+>() {
   abstract get: Effect<never, NotLoggedInError, UserProfileScheme>
+  static live(profile: Option<UserProfileScheme>): UserProfile {
+    return { get: profile.encaseInEffect(() => new NotLoggedInError()) }
+  }
 }
-
-export const LiveUserProfile = (profile: UserProfileScheme | null) =>
-  Effect(
-    UserProfile.make({
-      get: Option.fromNullable(profile).encaseInEffect(
-        () => new NotLoggedInError(),
-      ),
-    }),
-  ).toLayer(UserProfile)
 
 const userProfileFromJson = json['>>>'](UserProfileScheme)
 const userProfileFromJWT = jwt['>>>'](UserProfileScheme)

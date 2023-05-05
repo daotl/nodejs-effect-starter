@@ -1,4 +1,7 @@
-import '@effect-app-boilerplate/resources/_global'
-import '@effect-app/infra/_global'
+/* eslint-disable import/no-duplicates */
+/* eslint-disable unused-imports/no-unused-imports */
 
-import './_global.ext.js'
+import "@effect-app-boilerplate/resources/_global"
+import "@effect-app/infra/_global"
+
+import "./_global.ext.js"

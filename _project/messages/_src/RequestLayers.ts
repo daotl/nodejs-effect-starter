@@ -1,6 +1,6 @@
-import { ContextMap } from '@effect-app/infra/services/Store'
+import { ContextMap } from "@effect-app/infra/services/Store"
 
-export const BasicRequestEnv = Effect.gen(function* ($) {
+export const BasicRequestEnv = Effect.gen(function*($) {
   const rc = Context.make(ContextMap, yield* $(ContextMap.Make))
 
   return rc

@@ -2,4 +2,4 @@ export {
   buildFieldInfoFromProps,
   convertIn,
   convertOut,
-} from '@effect-app/vue/form'
+} from "@effect-app/vue/form"

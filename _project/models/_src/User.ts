@@ -1,26 +1,27 @@
-import { makePreparedLenses } from '@effect-app/prelude/schema'
+import { UserProfileId } from "@effect-app/prelude/ids"
+import { makePreparedLenses } from "@effect-app/prelude/schema"
 
-export const FirstName = ReasonableString['|>'](
-  arbitrary((FC) =>
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    fakerArb((faker) => faker.name.firstName)(FC).map(
-      (x) => x as ReasonableString,
-    ),
-  ),
-)['|>'](withDefaults)
+export const FirstName = ReasonableString
+  ["|>"](
+    arbitrary((FC) =>
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      fakerArb((faker) => faker.name.firstName)(FC).map((x) => x as ReasonableString)
+    )
+  )
+  ["|>"](withDefaults)
 export type FirstName = ParsedShapeOfCustom<typeof FirstName>
 
 export const DisplayName = FirstName
 export type DisplayName = ParsedShapeOfCustom<typeof DisplayName>
 
-export const LastName = ReasonableString['|>'](
-  arbitrary((FC) =>
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    fakerArb((faker) => faker.name.lastName)(FC).map(
-      (x) => x as ReasonableString,
-    ),
-  ),
-)['|>'](withDefaults)
+export const LastName = ReasonableString
+  ["|>"](
+    arbitrary((FC) =>
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      fakerArb((faker) => faker.name.lastName)(FC).map((x) => x as ReasonableString)
+    )
+  )
+  ["|>"](withDefaults)
 export type LastName = ParsedShapeOfCustom<typeof LastName>
 
 /**
@@ -34,7 +35,7 @@ export class FullName extends MNModel<
   FullName.Props
 >()({
   firstName: FirstName,
-  lastName: LastName,
+  lastName: LastName
 }) {
   static render(this: void, fn: FullName) {
     return LongString(`${fn.firstName} ${fn.lastName}`)
@@ -59,10 +60,10 @@ export function createFullName(firstName: string, lastName: string) {
   return { firstName, lastName }
 }
 
-export const UserId = StringId
-export type UserId = StringId
+export const UserId = UserProfileId
+export type UserId = UserProfileId
 
-export const Role = literal('manager', 'user')
+export const Role = literal("manager", "user")
 export type Role = ParsedShapeOfCustom<typeof Role>
 
 /**
@@ -70,15 +71,10 @@ export type Role = ParsedShapeOfCustom<typeof Role>
  * @tsplus companion User
  */
 @useClassFeaturesForSchema
-export class User extends MNModel<
-  User,
-  User.ConstructorInput,
-  User.Encoded,
-  User.Props
->()({
+export class User extends MNModel<User, User.ConstructorInput, User.Encoded, User.Props>()({
   id: UserId.withDefault,
   displayName: DisplayName,
-  role: Role,
+  role: Role
 }) {}
 
 /**
@@ -124,8 +120,9 @@ export namespace FullName {
    * @tsplus companion FullName.Encoded/Ops
    */
   export class Encoded extends EncodedClass<typeof FullName>() {}
-  export type ConstructorInput = ConstructorInputFromApi<typeof FullName>
-  export type Props = GetProvidedProps<typeof FullName>
+  export interface ConstructorInput
+    extends ConstructorInputFromApi<typeof FullName> {}
+  export interface Props extends GetProvidedProps<typeof FullName> {}
 }
 export namespace User {
   /**
@@ -133,8 +130,9 @@ export namespace User {
    * @tsplus companion User.Encoded/Ops
    */
   export class Encoded extends EncodedClass<typeof User>() {}
-  export type ConstructorInput = ConstructorInputFromApi<typeof User>
-  export type Props = GetProvidedProps<typeof User>
+  export interface ConstructorInput
+    extends ConstructorInputFromApi<typeof User> {}
+  export interface Props extends GetProvidedProps<typeof User> {}
 }
 /* eslint-enable */
 //

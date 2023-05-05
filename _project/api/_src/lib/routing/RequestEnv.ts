@@ -6,7 +6,7 @@ import { NotLoggedInError } from '@effect-app/infra/errors'
 import { RequestContextContainer } from '@effect-app/infra/services/RequestContextContainer'
 import type { ReqRes, ReqResSchemed } from '@effect-app/prelude/schema'
 import type express from 'express'
-import { CurrentUser, UserRepo } from '../../services.js'
+import type { UserProfileScheme } from '../../services/UserProfile.js'
 import { UserProfile } from '../../services/UserProfile.js'
 import type { CTX } from './ctx.js'
 
@@ -19,8 +19,8 @@ export function RequestEnv(handler: { Request: any }) {
     return Effect.gen(function* ($) {
       const requestContext = yield* $(RequestContextContainer.get)
 
-      const userProfile = requestContext.user
-        ? Option.some(requestContext.user)
+      const userProfile = requestContext.userProfile
+        ? Option.some(requestContext.userProfile)
         : Option.none
 
       if (!allowAnonymous && !userProfile.value) {
@@ -35,25 +35,9 @@ export function RequestEnv(handler: { Request: any }) {
       //   return yield* $(Effect.fail(new UnauthorizedError()))
       // }
       const ctx = yield* $(BasicRequestEnv)
-      return ctx.add(
-        UserProfile,
-        UserProfile.make({
-          get: Effect(userProfile).flatMap((_) =>
-            _.encaseInEffect(() => new NotLoggedInError()),
-          ),
-        }),
-      )
+      return ctx.add(UserProfile, UserProfile.live(userProfile))
     })
   }
-}
-
-/**
- * @tsplus static CurrentUser fromUserProfile
- */
-export function fromUserProfile() {
-  return UserRepo.flatMap((_) => _.getCurrentUser).map((_) =>
-    CurrentUser.make({ get: Effect(_) }),
-  )
 }
 
 export type RequestEnv = ContextA<
@@ -91,11 +75,13 @@ export function handleRequestEnv<
           Effect.all({
             context: RequestContextContainer.get,
             // TODO: user should only be fetched and type wise available when not allow anonymous
-            user: UserProfile.flatMap((_) =>
-              _.get.catchAll(() => Effect(undefined)),
+            userProfile: UserProfile.flatMap((_) =>
+              _.get.catchAll(() =>
+                Effect(undefined as unknown as UserProfileScheme),
+              ),
             ),
           }).flatMap((ctx) =>
-            restore(handler.h as (i: any, ctx: any) => Effect<R, ResE, ResA>)(
+            restore(handler.h as (i: any, ctx: CTX) => Effect<R, ResE, ResA>)(
               pars,
               ctx,
             ),

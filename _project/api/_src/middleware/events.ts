@@ -2,7 +2,6 @@ import { ClientEvents } from '@effect-app-boilerplate/resources'
 import * as Ex from '@effect-app/infra-adapters/express'
 import { reportRequestError } from '@effect-app/infra/api/reportError'
 import { Events } from '../services/Events.js'
-import { Do } from '@effect/data/Predicate'
 
 export const events = Ex.get('/events', (req, res) =>
   Do(($) => {
@@ -36,8 +35,7 @@ export const events = Ex.get('/events', (req, res) =>
 
     const namespace = req.headers['x-store-id']
       ? Array.isArray(req.headers['x-store-id'])
-        ? // rome-ignore lint/style/noNonNullAssertion: ignore
-          req.headers['x-store-id'][0]!
+        ? req.headers['x-store-id'][0]!
         : req.headers['x-store-id']
       : 'primary'
 
