@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@effect/data': 0.12.2
-  '@effect/io': ^0.26.0
+  '@effect/data': ^0.16.0
+  '@effect/io': ^0.35.1
   '@effect-app/core': ^0.55.0
   '@effect-app/infra': ^0.70.0
   '@effect-app/infra-adapters': ^0.48.2
@@ -40,8 +40,8 @@ patchedDependencies:
 
 dependencies:
   '@daotl-effect/prelude':
-    specifier: ^0.0.19
-    version: 0.0.19
+    specifier: ^0.0.20-alpha.0
+    version: 0.0.20-alpha.0
   '@effect-app/core':
     specifier: ^0.55.0
     version: 0.55.0
@@ -55,11 +55,11 @@ dependencies:
     specifier: ^0.57.0
     version: 0.57.0
   '@effect/data':
-    specifier: 0.12.2
-    version: 0.12.2
+    specifier: ^0.16.0
+    version: 0.16.0
   '@effect/io':
-    specifier: ^0.26.0
-    version: 0.26.0
+    specifier: ^0.35.1
+    version: 0.35.1
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -574,16 +574,16 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@daotl-effect/prelude@0.0.19:
-    resolution: {integrity: sha512-WcOrrWKJ4zJOwke89zpuRHKudBhzLujiu9JfwGj1rNrnA9bejzClg5qXwOLOqHLRuX6/IkC9dzhE8LQUELI6YA==}
+  /@daotl-effect/prelude@0.0.20-alpha.0:
+    resolution: {integrity: sha512-Q5lB2tqAePAXYcAnUgGVCXzfpwCGP8WdO/9s4GQtu5tQMOJ5jK6iuy6TXiPRvdgC4/sknriP9W3j+9CF5R5GRA==}
     dependencies:
       '@effect-app/core': 0.55.0
       '@effect-app/infra-adapters': 0.48.2
       '@effect-app/prelude': 0.57.0
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
-      '@effect/match': 0.26.0
-      '@effect/schema': 0.20.3
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
+      '@effect/match': 0.29.0
+      '@effect/schema': 0.30.1
       date-fns: 2.29.3(patch_hash=g5hqt5bhnjezqo5vnkpprfkba4)
       remeda: 1.24.0
       type-fest: 3.13.1
@@ -638,8 +638,8 @@ packages:
   /@effect-app/core@0.55.0:
     resolution: {integrity: sha512-jqujzbljuQBt00BzzTwBw2jWLNHrwEBxLTvAnnOOcYmW5UW/+cbpxWs49XSv43vJ1U2Bdftml8JmfMjzQaeGNQ==}
     dependencies:
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       '@effect/stream': 0.22.2
       '@fp-ts/optic': 0.8.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
       cross-fetch: 3.1.8
@@ -658,8 +658,8 @@ packages:
       '@effect-app/core': 0.55.0
       '@effect-app/prelude': 0.57.0
       '@effect-app/schema': 0.49.0
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       '@fp-ts/optic': 0.8.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
       query-string: 8.1.0
     transitivePeerDependencies:
@@ -675,8 +675,8 @@ packages:
       '@effect-app/infra-adapters': 0.48.2
       '@effect-app/prelude': 0.57.0
       '@effect-app/schema': 0.49.0
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       '@faker-js/faker': 8.0.2
       '@sendgrid/helpers': 7.7.0
       '@sendgrid/mail': 7.7.0
@@ -699,8 +699,8 @@ packages:
     dependencies:
       '@effect-app/core': 0.55.0
       '@effect-app/schema': 0.49.0
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       '@fp-ts/optic': 0.8.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
       date-fns: 2.29.3(patch_hash=g5hqt5bhnjezqo5vnkpprfkba4)
       lodash: 4.17.21
@@ -718,8 +718,8 @@ packages:
     resolution: {integrity: sha512-FcqYF+Cmrz2VrprY7EKBvXN3MEvR02UBpeoyUpgbYCfGSS9fAjj1W8g4OuQqjyFUVOIQ5b+BdZLe76B6FZDG8A==}
     dependencies:
       '@effect-app/core': 0.55.0
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       '@fp-ts/optic': 0.8.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
       cross-fetch: 3.1.8
       lodash: 4.17.21
@@ -730,14 +730,14 @@ packages:
       - encoding
     dev: false
 
-  /@effect/data@0.12.2:
-    resolution: {integrity: sha512-bmWRTcsSRG1FlBswT+D8SxW6r3c4B3pKJrjYfitCD03tXHnup5gLHaWqbFgIjiyYITS+UsJRRjVrNxvyGG4ZNQ==}
+  /@effect/data@0.16.0:
+    resolution: {integrity: sha512-ckZ/WvvI4zZGo+vRVTRBfBi4KvY9ZjLlnDWlrfhKnAJvgDu6SI8A5FJ8c/eJphmtLWNdoQx8j9pFhWLSIQe5RQ==}
     dev: false
 
-  /@effect/io@0.26.0:
-    resolution: {integrity: sha512-umwZ/sRoV7zb/8WwoiK7xWoypqvY6C1EXWEGORpViAFUTx3/bXc9i7JtdttTWVokXb3qogrxGX2SHopB20I4vQ==}
+  /@effect/io@0.35.1:
+    resolution: {integrity: sha512-kSYaYXSzBkDdtEgBOBZTOsF+7D9HRiMNwkDTGRARRow/5zXJVZxHxDAZJdA/3Am7irCD7yeDDsxsMVwqgfJdYg==}
     dependencies:
-      '@effect/data': 0.12.2
+      '@effect/data': 0.16.0
     dev: false
 
   /@effect/language-service@0.0.19(patch_hash=izp2ue34jjv4swyrhg2ux4ha3e):
@@ -748,34 +748,34 @@ packages:
     dev: true
     patched: true
 
-  /@effect/match@0.26.0:
-    resolution: {integrity: sha512-vQ+2k7GZj5WEn9fhHg9Ptvc9BSP+C9v7X2IqK9pm63moTstG4GRgPfDSKMcG8l6z4IFxcnqq6iTo+FYeYkUqlw==}
+  /@effect/match@0.29.0:
+    resolution: {integrity: sha512-Qv3zkCCCfSaZoKIlmA9GugAFBjOQn4O35IdqSNaE1M+R95hRUtvZ6MyjH4LNrJ9TGJRUi5FTgIS6RirdCJrvRQ==}
     dependencies:
-      '@effect/data': 0.12.2
-      '@effect/schema': 0.26.1
+      '@effect/data': 0.16.0
+      '@effect/schema': 0.29.1
     dev: false
 
-  /@effect/schema@0.20.3:
-    resolution: {integrity: sha512-pjJW9QkHZd2/fq7Bhd6pAOidMJ0OUODOeUlesPDK0jpo62AaU9g+IGXt3v5NU8rXSX77igZgfK08XhmofwHn0A==}
+  /@effect/schema@0.29.1:
+    resolution: {integrity: sha512-GPRGuvIu5b1PjwnQsZAJp5K6YG8E6T+HWwSJtSKv/FQul1SLM8DcsLZ4xM8HGIGnn/i/qZPHnl2XvbUjDyOV3w==}
     dependencies:
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       fast-check: 3.11.0
     dev: false
 
-  /@effect/schema@0.26.1:
-    resolution: {integrity: sha512-kvCLq0WJcbyIy4txniYypZzteRJYZBtzgN4PLSirl84qHc6siIEWW1KdCYaDQ5NIDrrC2FRDMy+slINYg0+2wg==}
+  /@effect/schema@0.30.1:
+    resolution: {integrity: sha512-A/WwOnTgdmomXwFekJlqItAYBazSPEXbQHl0joJBb796GZtf5K/IZEhuTaL9TqdHTXi6FL+iSlFveZdRjz0Nzw==}
     dependencies:
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
       fast-check: 3.11.0
     dev: false
 
   /@effect/stream@0.22.2:
     resolution: {integrity: sha512-86dww4iOSGPEYh0bOlsmCcXUbRAUQo/E9ioedfVvNs/XLuCV8yrrTE1yXuW9kMeXJOHZZgtHpSGhltlzari1zg==}
     dependencies:
-      '@effect/data': 0.12.2
-      '@effect/io': 0.26.0
+      '@effect/data': 0.16.0
+      '@effect/io': 0.35.1
     dev: false
 
   /@esbuild/android-arm64@0.18.14:
@@ -1031,7 +1031,7 @@ packages:
   /@fp-ts/optic@0.8.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva):
     resolution: {integrity: sha512-iFIJAA7iATFVxwAt8xDX02HqKg7P3ji8JfhapJ203v2tcMLBD/fbHOD9gLv0Z9w8nL3RXpxIfYafcuZzIQOukg==}
     dependencies:
-      '@effect/data': 0.12.2
+      '@effect/data': 0.16.0
     dev: false
     patched: true
 
