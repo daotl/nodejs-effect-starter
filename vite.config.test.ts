@@ -13,12 +13,10 @@ export default function defineTestConfig(
     useDist: boolean,
     useFullDist: boolean,
   ) => UserConfig,
-  useDist = process.env.TEST_USE_DIST === 'true',
+  _useDist = process.env.TEST_USE_DIST === 'true',
   useFullDist = process.env.TEST_USE_FULL_DIST === 'true',
 ) {
-  if (useFullDist) {
-    useDist = true
-  }
+  const useDist = useFullDist || _useDist
   const b = makeConfig(dirName, useDist)
   // autoimport seems to work best, even if in some cases setting vitest/globals as types works.
   const autoImport = AutoImport({

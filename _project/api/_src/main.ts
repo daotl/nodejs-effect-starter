@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { api } from '@effect-app-boilerplate/api/api'
-import { reportError } from '@effect-app/infra/errorReporter'
-import { CauseException } from '@effect-app/infra/errors'
-import { ApiConfig, BaseConfig } from './config.js'
-import { Emailer, MemQueue } from './services.js'
+import { api } from "@effect-app-boilerplate/api/api"
+import { ApiConfig, BaseConfig } from "./config.js"
+import { Emailer, MemQueue } from "./services.js"
 
-import { runtimeDebug } from '@effect/data/Debug'
+import { runMain } from "@effect-app-boilerplate/messages/basicRuntime"
+import { runtimeDebug } from "@effect/data/Debug"
 
 runtimeDebug.traceStackLimit = 50
 const appConfig = BaseConfig.config.runSync$
@@ -35,17 +34,16 @@ const main = Effect.gen(function* ($) {
   return yield* $(Effect.never().scoped.provideLayer(api(cfg)))
 })
 
-const program = main.provideSomeLayer(
-  (appConfig.sendgrid.apiKey
-    ? Emailer.LiveSendgrid(Config(appConfig.sendgrid))
-    : Emailer.Fake) > MemQueue.Live,
-)
+// NOTE: all dependencies should have been provided, for us to be able to run the program.
+// if you get a type error here on the R argument, you haven't provided that dependency yet, or not at the appropriate time / location
+const program = main
+  .provideSomeLayer(
+    (appConfig.sendgrid.apiKey
+      ? Emailer.LiveSendgrid(Config(appConfig.sendgrid))
+      : Emailer.Fake)
+      > MemQueue.Live
+  )
 
-export class AppException<E> extends CauseException<E> {
-  constructor(cause: Cause<E>) {
-    super(cause, 'App')
-  }
-}
-const reportAppError = reportError((cause) => new AppException(cause))
-
-program.tapErrorCause(reportAppError).runMain$()
+// NOTE: all dependencies should have been provided, for us to be able to run the program.
+// if you get a type error here on the R argument, you haven't provided that dependency yet, or not at the appropriate time / location
+runMain(program)

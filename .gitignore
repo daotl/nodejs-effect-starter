@@ -3,7 +3,7 @@ node_modules/
 *.log
 _project/**/dist/
 _project/**/dist/
-!**/.eslintrc*.js
+!./**/.eslintrc*.js
 .build/
 dist/
 .cache/
