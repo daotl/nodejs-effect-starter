@@ -7,11 +7,15 @@
       "**/dist"
     ]
   },
-  "linter": {
-    "rules": {
-      "correctness": {
-        "noUndeclaredVariables": "off"
-      }
-    }
+  "javascript": {
+    "globals": [
+      "$",
+      "argv",
+      "Cause",
+      "Context",
+      "Effect",
+      "Layer",
+      "Tag"
+    ]
   }
 }

@@ -1,12 +1,5 @@
 {
   "$schema": "./node_modules/rome/configuration_schema.json",
-  "files": {
-    "ignore": [
-      "**/generated",
-      "**/*.json",
-      "**/dist"
-    ]
-  },
   "linter": {
     "rules": {
       "recommended": true,
@@ -19,7 +12,7 @@
       },
       "correctness": {
         "recommended": true,
-        "noUndeclaredVariables": "off",
+        "noUndeclaredVariables": "error",
         "noUnusedVariables": "error"
       },
       "performance": {
@@ -48,20 +41,6 @@
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "asNeeded"
-    },
-    "globals": [
-      "$",
-      "argv",
-      "Cause",
-      "Context",
-      "Effect",
-      "Layer",
-      "Tag"
-    ]
-  },
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
+    }
   }
 }
