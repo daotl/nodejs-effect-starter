@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 import { pretty } from '@effect-app/core/utils'
+import { RequestContext } from '@effect-app/infra/RequestContext'
 import type { RequestHandlerOptRes } from '@effect-app/infra/api/express/schema/requestHandler'
 import { parseRequestParams } from '@effect-app/infra/api/express/schema/requestHandler'
 import {
@@ -8,8 +9,7 @@ import {
   respondSuccess,
 } from '@effect-app/infra/api/routing'
 import type { ValidationError } from '@effect-app/infra/errors'
-import { RequestContext } from '@effect-app/infra/RequestContext'
-import { extractSchema, SchemaNamed } from '@effect-app/prelude/schema'
+import { SchemaNamed, extractSchema } from '@effect-app/prelude/schema'
 import type express from 'express'
 
 import { reportRequestError } from '@effect-app/infra/api/reportError'

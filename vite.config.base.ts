@@ -1,6 +1,6 @@
+import fs from 'fs'
 /// <reference types="vitest" />
 import path from 'path'
-import fs from 'fs'
 import { effectPlugin } from '@effect-app/compiler/vitePlugin2'
 import { UserConfig } from 'vite'
 

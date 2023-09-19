@@ -3,9 +3,9 @@
 import type { SupportedErrors } from '@effect-app/infra/api/defaultErrorHandler'
 import { defaultErrorHandler } from '@effect-app/infra/api/defaultErrorHandler'
 import type { Flatten, RouteMatch } from '@effect-app/infra/api/routing'
-import { matchAuth } from './match.js'
 import type { RequestEnv, RequestHandler } from './RequestEnv.js'
 import { handleRequestEnv } from './RequestEnv.js'
+import { matchAuth } from './match.js'
 
 /**
  * Gather all handlers of a module and attach them to the Server.

@@ -98,7 +98,7 @@ export function matchAuth<
     // (requestHandler.Request as any).allowAnonymous
     // ?
     match(path, handler)
-    // : match(path, checkJwt(Auth0Config.config.runSync$), handler)
+      // : match(path, checkJwt(Auth0Config.config.runSync$), handler)
       .zipRight(
         Effect(
           makeRouteDescriptor(

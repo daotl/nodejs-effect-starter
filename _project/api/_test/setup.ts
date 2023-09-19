@@ -40,7 +40,9 @@ declare global {
 }
 
 beforeAll(async () => {
-  if (globalThis.runtime) { return }
+  if (globalThis.runtime) {
+    return
+  }
   console.log(`[${POOL_ID}] Creating runtime`)
 
   const appRuntime = <R, E, A>(layer: Layer<R, E, A>) =>

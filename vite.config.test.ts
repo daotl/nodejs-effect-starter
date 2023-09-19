@@ -1,10 +1,10 @@
+import fs from 'fs'
 /// <reference types="vitest" />
 import { effectPlugin } from '@effect-app/compiler/vitePlugin2'
-import fs from 'fs'
-import makeConfig from './vite.config.base'
 import AutoImport from 'unplugin-auto-import/vite'
 import { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
+import makeConfig from './vite.config.base'
 
 export default function defineTestConfig(
   dirName?: string,
