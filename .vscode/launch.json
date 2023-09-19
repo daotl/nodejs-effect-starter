@@ -4,9 +4,13 @@
       "name": "API debug",
       "request": "launch",
       "cwd": "${workspaceFolder}/_project/api",
-      "runtimeArgs": ["debug"],
+      "runtimeArgs": [
+        "debug"
+      ],
       "runtimeExecutable": "pnpm",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "type": "pwa-node"
     },
     {
@@ -14,7 +18,9 @@
       "port": 9229,
       "cwd": "${workspaceFolder}/_project/api",
       "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "type": "pwa-node",
       "sourceMaps": true
     }
