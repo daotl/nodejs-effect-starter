@@ -89,7 +89,7 @@
     "@effect-app/compiler": "^0.28.0",
     "@effect/language-service": "0.0.19",
     "@tsconfig/esm": "^1.0.5",
-    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/node20": "^20.1.2",
     "@tsconfig/strictest": "^2.0.2",
     "@tsplus/installer": "0.0.179",
     "@types/node": "~20.8.3",
