@@ -6,8 +6,6 @@ FROM node:${NODEJS_VERSION}-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
-COPY . /app
-WORKDIR /app
 
 # Install only production dependencies
 FROM base AS prod
